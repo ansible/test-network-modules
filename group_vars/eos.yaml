@@ -1,0 +1,17 @@
+---
+cli:
+  host: "{{ inventory_hostname }}"
+  username: "{{ eos_cli_user | default('admin') }}"
+  password: "{{ eos_cli_pass | default('admin') }}"
+  transport: cli
+  authorize: yes
+
+eapi:
+  host: "{{ inventory_hostname }}"
+  username: "{{ eos_eapi_user | default('admin') }}"
+  password: "{{ eos_eapi_pass | default('admin') }}"
+  transport: eapi
+  use_ssl: no
+  authorize: yes
+
+

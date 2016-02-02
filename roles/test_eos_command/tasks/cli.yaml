@@ -1,0 +1,12 @@
+---
+- name: collect all cli test cases
+  find:
+    paths: "{{ role_path }}/tests/cli"
+    patterns: '*.yaml'
+  register: test_cases
+  delegate_to: localhost
+
+- name: run test case
+  include: "{{ item.path }}"
+  with_items: test_cases.files
+

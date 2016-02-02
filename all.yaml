@@ -1,0 +1,9 @@
+---
+- hosts: eos
+  gather_facts: no
+  connection: local
+
+  roles:
+    - { role: test_eos_command, tags: ['eos_command'] }
+    - { role: test_eos_template, tags: ['eos_template']  }
+    #- { role: test_eos_config, tags: ['eos_config'] }

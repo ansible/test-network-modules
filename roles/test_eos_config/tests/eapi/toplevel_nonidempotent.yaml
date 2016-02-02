@@ -1,0 +1,33 @@
+---
+- debug: msg="START eapi/toplevel_nonidempontent"
+
+- name: setup test
+  eos_config:
+    commands: ['hostname {{ inventory_hostname }}']
+    provider: "{{ eapi }}"
+    force: yes
+
+- name: configure top level command
+  eos_config:
+    commands: ['hostname foo']
+    provider: "{{ eapi }}"
+    match: strict
+  register: result
+
+- assert:
+    that:
+      - "result.changed == true"
+      - "'hostname foo' in result.commands"
+
+- name: configure top level command idempotent check
+  eos_config:
+    commands: ['hostname foo']
+    provider: "{{ eapi }}"
+    match: strict
+  register: result
+
+- assert:
+    that:
+      - "result.changed == true"
+
+- debug: msg="END eapi/toplevel_nonidempontent"
