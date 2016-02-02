@@ -1,10 +1,10 @@
 ---
 - block:
     # Run all tests
-    - name: collect all eapi test cases
+    - name: collect all cli test cases
       find:
-          paths: "{{ role_path }}/tests/eapi"
-          patterns: '*.yaml'
+          paths: "{{ role_path }}/tests/cli"
+          patterns: '*.yml'
       register: test_cases
       delegate_to: localhost
 
@@ -15,10 +15,10 @@
 
 - block:
     # Run a single test
-    - name: run specific test cases
+    - name: run specific cli test case
       find:
-          paths: "{{ role_path }}/tests/eapi"
-          patterns: '{{ testcase }}.yaml'
+          paths: "{{ role_path }}/tests/cli"
+          patterns: '{{ testcase }}.yml'
       register: test_cases
       delegate_to: localhost
 

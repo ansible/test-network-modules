@@ -3,7 +3,19 @@
   gather_facts: no
   connection: local
 
+  vars:
+    testcase: "{{ test_case | default('') }}"
+    limitto: "{{ limit_to | default('') }}"
+    test_cases:
+        - files: []
+
   roles:
-    - { role: test_eos_command, tags: ['eos_command'] }
-    - { role: test_eos_template, tags: ['eos_template']  }
-    #- { role: test_eos_config, tags: ['eos_config'] }
+
+    # use -e"limit_to=foo" to run a specific set of tests only
+    # use -tags="cli or eapi" -e"limit_to=foo testcase=bar" to run a specific test case
+
+    - { role: test_eos_command, when: "limitto == '' or limitto == 'command'" }
+    - { role: test_eos_template, when: "limitto == '' or limitto == 'template'" }
+    #- { role: test_eos_config, when: "limitto == '' or limitto == 'config'" }
+    - { role: test_eos_eapi, debug: yes, when: "limitto == '' or limitto == 'eapi'" }
+
