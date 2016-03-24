@@ -1,0 +1,15 @@
+---
+- debug: msg="START cli/bad_action.yaml"
+
+- name: configure single bad_action command
+  junos_config:
+    lines: ['invalid system foo']
+    provider: "{{ cli }}"
+  register: result
+  ignore_errors: yes
+
+- assert:
+    that:
+      - "result.failed == true"
+
+- debug: msg="END cli/bad_action.yaml"

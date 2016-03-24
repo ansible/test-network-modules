@@ -1,0 +1,14 @@
+---
+- hosts: junos
+  gather_facts: no
+  connection: local
+
+  vars:
+    limit_to: "*"
+
+  roles:
+    - { role: test_junos_command, when: "limit_to in ['*', 'junos_command']" }
+    - { role: test_junos_config, when: "limit_to in ['*', 'junos_config']" }
+    - { role: test_junos_template, when: "limit_to in ['*', 'junos_template']" }
+
+

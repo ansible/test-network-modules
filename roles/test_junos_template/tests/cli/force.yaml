@@ -1,0 +1,37 @@
+---
+- debug: msg="START cli/basic.yaml"
+
+- name: setup
+  junos_config:
+    lines:
+      - delete interfaces lo0
+    force: yes
+    provider: "{{ cli }}"
+  register: test
+- debug: var=test
+
+- name: configure basic config template
+  junos_template:
+    src: basic/config.j2
+    provider: "{{ cli }}"
+    force: yes
+  register: result
+
+- assert:
+    that:
+      - "result.changed == true"
+      - "'set interfaces lo0 unit 0 family inet address 1.1.1.1/32' in result.updates"
+
+- name: check basic config template idempotent
+  junos_template:
+    src: basic/config.j2
+    provider: "{{ cli }}"
+    force: yes
+  register: result
+
+- assert:
+    that:
+      - "result.changed == true"
+      - "'set interfaces lo0 unit 0 family inet address 1.1.1.1/32' in result.updates"
+
+- debug: msg="END cli/basic.yaml"

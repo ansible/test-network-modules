@@ -1,0 +1,43 @@
+---
+- debug: msg="START cli/configure.yaml"
+
+- name: Setup - put NXAPI in stopped state
+  nxos_nxapi:
+    state: stopped
+    provider: "{{ cli }}"
+
+- name: Configure NXAPI
+  nxos_nxapi:
+    enable_http: no
+    enable_sandbox: no
+    https_port: 9443
+    provider: "{{ cli }}"
+  register: result
+
+- nxos_command:
+    commands:
+      - show nxapi | json
+    provider: "{{ cli }}"
+  register: result
+
+- name: Assert configuration changes
+  assert:
+    that:
+      - result.result[0].http_port is not defined
+      - result.result[0].https_port == 9443
+      - result.result[0].sandbox_status == 'Disabled'
+
+- name: Configure NXAPI again
+  nxos_nxapi:
+    enable_http: no
+    enable_sandbox: no
+    https_port: 9443
+    provider: "{{ cli }}"
+  register: result
+
+- name: Assert configuration is idempotent
+  assert:
+    that:
+      - result.commands | length == 0
+
+- debug: msg="END cli/configure.yaml"

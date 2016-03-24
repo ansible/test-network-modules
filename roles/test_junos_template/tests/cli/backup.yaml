@@ -1,0 +1,48 @@
+---
+- debug: msg="START cli/backup.yaml"
+
+- name: setup
+  junos_config:
+    lines:
+      - delete interfaces lo0
+    force: yes
+    provider: "{{ cli }}"
+
+- name: collect any backup files
+  find:
+    paths: "{{ role_path }}/backup"
+    pattern: "{{ inventory_hostname }}_config*"
+  register: backup_files
+  delegate_to: localhost
+
+- name: delete backup files
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: backup_files.files
+  when: backup_files is defined
+
+- name: configure using template with backup
+  junos_template:
+    src: basic/config.j2
+    provider: "{{ cli }}"
+    backup: yes
+  register: result
+
+- assert:
+    that:
+      - "result.changed == true"
+      - "'set interfaces lo0 unit 0 family inet address 1.1.1.1/32' in result.updates"
+
+- name: collect any backup files
+  find:
+    paths: "{{ role_path }}/backup"
+    pattern: "{{ inventory_hostname }}_config*"
+  register: backup_files
+  delegate_to: localhost
+
+- assert:
+    that:
+      - "backup_files.files is defined"
+
+- debug: msg="END cli/backup.yaml"

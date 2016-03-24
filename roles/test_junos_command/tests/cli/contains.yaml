@@ -1,0 +1,21 @@
+---
+- debug: msg="START cli/contains.yaml"
+
+- name: test contains operator
+  junos_command:
+    commands:
+      - show version
+      - show interfaces fxp0 | display json
+    waitfor:
+      - "result[0] contains JUNOS"
+      - "result[1].interface-information[0].physical-interface[0].name[0].data contains fxp"
+    provider: "{{ cli }}"
+  register: result
+
+- assert:
+    that:
+      - "result.changed == false"
+      - "result.stdout is defined"
+      - "result.stdout_lines is defined"
+
+- debug: msg="END cli/contains.yaml"

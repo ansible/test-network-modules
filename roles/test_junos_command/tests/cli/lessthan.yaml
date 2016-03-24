@@ -1,0 +1,36 @@
+---
+- debug: msg="START cli/lessthan.yaml"
+
+- name: test lt operator
+  junos_command:
+    commands:
+      - show version
+      - show interfaces fxp0 | display json
+    waitfor:
+      - "result[1].interface-information[0].physical-interface[0].mtu[0].data lt 1600"
+    provider: "{{ cli }}"
+  register: result
+
+- assert:
+    that:
+      - "result.changed == false"
+      - "result.stdout is defined"
+      - "result.stdout_lines is defined"
+
+- name: test < operator
+  junos_command:
+    commands:
+      - show version
+      - show interfaces fxp0 | display json
+    waitfor:
+      - "result[1].interface-information[0].physical-interface[0].mtu[0].data < 1600"
+    provider: "{{ cli }}"
+  register: result
+
+- assert:
+    that:
+      - "result.changed == false"
+      - "result.stdout is defined"
+      - "result.stdout_lines is defined"
+
+- debug: msg="END cli/lessthan.yaml"

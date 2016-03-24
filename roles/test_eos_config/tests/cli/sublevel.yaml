@@ -1,0 +1,34 @@
+---
+- debug: msg="START cli/sublevel.yaml"
+
+- name: setup test
+  eos_config:
+    lines: ['vlan 10', 'no vlan 10']
+    provider: "{{ cli }}"
+    force: yes
+
+- name: configure sub level command
+  eos_config:
+    lines: ['name test']
+    parents: ['vlan 10']
+    provider: "{{ cli }}"
+  register: result
+
+- assert:
+    that:
+      - "result.changed == true"
+      - "'vlan 10' in result.updates"
+      - "'name test' in result.updates"
+
+- name: configure sub level command idempotent check
+  eos_config:
+    lines: ['name test']
+    parents: ['vlan 10']
+    provider: "{{ cli }}"
+  register: result
+
+- assert:
+    that:
+      - "result.changed == false"
+
+- debug: msg="END cli/sublevel.yaml"

@@ -1,0 +1,14 @@
+---
+- hosts: iosxr
+  gather_facts: no
+  connection: local
+
+  vars:
+    limit_to: "*"
+
+  roles:
+    #- { role: test_iosxr_command, when: "limit_to in ['*', 'iosxr_command']" }
+    - { role: test_iosxr_config, when: "limit_to in ['*', 'iosxr_config']" }
+    - { role: test_iosxr_template, when: "limit_to in ['*', 'iosxr_template']" }
+
+

@@ -1,0 +1,30 @@
+---
+- debug: msg="START cli/output.yaml"
+
+- name: get output for single command
+  junos_command:
+    commands: ['show version']
+    provider: "{{ cli }}"
+  register: result
+
+- assert:
+    that:
+      - "result.changed == false"
+      - "result.stdout is defined"
+      - "result.stdout_lines is defined"
+
+- name: get output for multiple commands
+  junos_command:
+    commands:
+      - show version
+      - show route
+    provider: "{{ cli }}"
+  register: result
+
+- assert:
+    that:
+      - "result.changed == false"
+      - "result.stdout is defined"
+      - "result.stdout_lines is defined"
+
+- debug: msg="END cli/output.yaml"

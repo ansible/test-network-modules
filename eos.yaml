@@ -1,0 +1,15 @@
+---
+- hosts: eos
+  gather_facts: no
+  connection: local
+
+  vars:
+    limit_to: "*"
+
+  roles:
+    - { role: test_eos_command, when: "limit_to in ['*', 'eos_command']" }
+    - { role: test_eos_config, when: "limit_to in ['*', 'eos_config']" }
+    - { role: test_eos_template, when: "limit_to in ['*', 'eos_template']" }
+   # - { role: test_eos_eapi, debug: yes, when: "limit_to == '' or limit_to == 'eapi'" }
+
+
