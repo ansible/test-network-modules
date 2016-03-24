@@ -1,8 +1,6 @@
-[![Build Status](http://jenkins.testing.ansible.com/buildStatus/icon?job=Test_EOS_Modules)](http://jenkins.testing.ansible.com/view/Ansible/job/Test_EOS_Modules/)
-
 # test-network-modules
 
-Playbooks for testing Ansible modules with Arista EOS devices
+Playbooks for testing Ansible network modules
 
 ```
 $ ansible-playbook all.yaml
