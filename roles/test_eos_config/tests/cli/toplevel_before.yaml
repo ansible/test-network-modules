@@ -1,4 +1,6 @@
 ---
+- debug: msg="START cli/toplevel_before.yaml"
+
 - name: setup test
   eos_config:
     lines:
@@ -31,3 +33,4 @@
     that:
       - "result.changed == false"
 
+- debug: msg="END cli/toplevel_before.yaml"

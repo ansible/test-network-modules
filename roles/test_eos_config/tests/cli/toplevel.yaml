@@ -1,4 +1,6 @@
 ---
+- debug: msg="START cli/toplevel.yaml"
+
 - name: setup test
   eos_config:
     lines: ['hostname {{ inventory_hostname }}']
@@ -26,3 +28,4 @@
     that:
       - "result.changed == false"
 
+- debug: msg="END cli/toplevel.yaml"

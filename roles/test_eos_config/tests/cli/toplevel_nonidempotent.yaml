@@ -1,5 +1,5 @@
 ---
-- debug: msg="START CLI/TOPLEVEL_NONIDEMPOTENT.YAML"
+- debug: msg="START cli/toplevel_nonidempotent.yaml"
 
 - name: setup test
   eos_config:
@@ -30,4 +30,4 @@
     that:
       - "result.changed == true"
 
-- debug: msg="END CLI/TOPLEVEL_NONIDEMPOTENT.YAML"
+- debug: msg="END cli/toplevel_nonidempotent.yaml"
