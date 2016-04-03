@@ -1,7 +1,7 @@
 ---
 - debug: msg="START cli/sublevel_block.yaml"
 
-- name: setup test
+- name: setup
   ios_config:
     lines:
       - permit ip host 1.1.1.1 any log
@@ -51,5 +51,12 @@
 - assert:
     that:
       - "result.changed == false"
+
+- name: teardown
+  ios_config:
+    lines:
+      - no ip access-list extended test
+    force: yes
+    provider: "{{ cli }}"
 
 - debug: msg="END cli/sublevel_block.yaml"

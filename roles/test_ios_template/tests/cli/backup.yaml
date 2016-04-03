@@ -45,4 +45,11 @@
     that:
       - "backup_files.files is defined"
 
+- name: teardown
+  ios_config:
+    commands:
+      - no interface Loopback999
+    force: yes
+    provider: "{{ cli }}"
+
 - debug: msg="END cli/backup.yaml"

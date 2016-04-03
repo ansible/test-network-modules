@@ -1,7 +1,7 @@
 ---
 - debug: msg="START cli/toplevel.yaml"
 
-- name: setup test
+- name: setup
   ios_config:
     lines: ['hostname {{ inventory_hostname }}']
     provider: "{{ cli }}"
@@ -27,5 +27,11 @@
 - assert:
     that:
       - "result.changed == false"
+
+- name: teardown
+  ios_config:
+    lines: ['hostname {{ inventory_hostname }}']
+    provider: "{{ cli }}"
+    force: yes
 
 - debug: msg="END cli/toplevel.yaml"

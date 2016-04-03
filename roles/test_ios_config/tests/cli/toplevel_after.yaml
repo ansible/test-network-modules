@@ -1,7 +1,7 @@
 ---
 - debug: msg="START cli/toplevel_after.yaml"
 
-- name: setup test
+- name: setup
   ios_config:
     lines:
       - "snmp-server contact ansible"
@@ -32,5 +32,13 @@
 - assert:
     that:
       - "result.changed == false"
+
+- name: teardown
+  ios_config:
+    lines:
+      - "no snmp-server contact"
+      - "hostname {{ inventory_hostname }}"
+    provider: "{{ cli }}"
+    force: yes
 
 - debug: msg="END cli/toplevel_after.yaml"

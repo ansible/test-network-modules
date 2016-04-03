@@ -33,4 +33,11 @@
     that:
       - "result.changed == false"
 
+- name: teardown
+  ios_config:
+    lines:
+      - 'no ip access-list extended test'
+    provider: "{{ cli }}"
+    force: yes
+
 - debug: msg="END cli/sublevel.yaml"
