@@ -3,7 +3,7 @@
 
 - name: setup
   nxos_config:
-    lines: ['feature bgp']
+    lines: ['feature bgp', 'no router bgp 1']
     provider: "{{ cli }}"
     force: yes
   ignore_errors: yes
@@ -22,7 +22,7 @@
       - "'address-family ipv4 unicast' in result.updates"
       - "'maximum-paths 14' in result.updates"
 
-- name: test multi level command
+- name: check multi level command
   nxos_config:
     lines: ['maximum-paths 14']
     parents: ['router bgp 1', 'address-family ipv4 unicast']
