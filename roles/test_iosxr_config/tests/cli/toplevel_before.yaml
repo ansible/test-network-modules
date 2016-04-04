@@ -1,10 +1,10 @@
 ---
 - debug: msg="START cli/toplevel_before.yaml"
 
-- name: setup test
+- name: setup
   iosxr_config:
     commands:
-      - "snmp-server contact ansible"
+      - "no cdp"
       - "hostname {{ inventory_hostname }}"
     provider: "{{ cli }}"
     force: yes
@@ -12,7 +12,7 @@
 - name: configure top level command with before
   iosxr_config:
     commands: ['hostname foo']
-    before: ['snmp-server contact bar']
+    before: ['cdp']
     provider: "{{ cli }}"
   register: result
 
@@ -20,17 +20,25 @@
     that:
       - "result.changed == true"
       - "'hostname foo' in result.updates"
-      - "'snmp-server contact bar' in result.updates"
+      - "'cdp' in result.updates"
 
 - name: configure top level command with before idempotent check
   iosxr_config:
     commands: ['hostname foo']
-    before: ['snmp-server contact foo']
+    before: ['cdp']
     provider: "{{ cli }}"
   register: result
 
 - assert:
     that:
       - "result.changed == false"
+
+- name: teardown
+  iosxr_config:
+    commands:
+      - "no cdp"
+      - "hostname {{ inventory_hostname }}"
+    provider: "{{ cli }}"
+    force: yes
 
 - debug: msg="END cli/toplevel_before.yaml"

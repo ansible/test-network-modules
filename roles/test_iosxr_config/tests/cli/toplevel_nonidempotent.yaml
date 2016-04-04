@@ -1,7 +1,7 @@
 ---
 - debug: msg="START cli/toplevel_nonidempotent.yaml"
 
-- name: setup test
+- name: setup
   iosxr_config:
     commands: ['hostname {{ inventory_hostname }}']
     provider: "{{ cli }}"
@@ -29,5 +29,11 @@
 - assert:
     that:
       - "result.changed == true"
+
+- name: teardown
+  iosxr_config:
+    commands: ['hostname {{ inventory_hostname }}']
+    provider: "{{ cli }}"
+    force: yes
 
 - debug: msg="END cli/toplevel_nonidempotent.yaml"
