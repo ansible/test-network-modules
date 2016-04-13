@@ -1,11 +1,11 @@
 ---
-- debug: msg="START cli/bad_action.yaml"
+- debug: msg="START netconf/bad_action.yaml"
 
 - name: configure single bad_action command
   junos_config:
     lines:
       - 'invalid system foo'
-    provider: "{{ cli }}"
+    provider: "{{ netconf }}"
   register: result
   ignore_errors: yes
 
@@ -13,4 +13,4 @@
     that:
       - "result.failed == true"
 
-- debug: msg="END cli/bad_action.yaml"
+- debug: msg="END netconf/bad_action.yaml"

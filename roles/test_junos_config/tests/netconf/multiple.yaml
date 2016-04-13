@@ -1,12 +1,12 @@
 ---
-- debug: msg="START cli/multiple.yaml"
+- debug: msg="START netconf/multiple.yaml"
 
 - name: setup
   junos_config:
     lines:
       - "set system host-name {{ inventory_hostname }}"
       - "delete interfaces lo0"
-    provider: "{{ cli }}"
+    provider: "{{ netconf }}"
   register: test
 
 - name: configure multiple commands
@@ -14,7 +14,7 @@
     lines:
       - 'set system host-name {{ inventory_hostname }}'
       - 'set interfaces lo0 unit 0 family inet address 1.1.1.1/32'
-    provider: "{{ cli }}"
+    provider: "{{ netconf }}"
   register: result
 
 - assert:
@@ -28,7 +28,7 @@
     lines:
       - 'set system host-name {{ inventory_hostname }}'
       - 'set interfaces lo0 unit 0 family inet address 1.1.1.1/32'
-    provider: "{{ cli }}"
+    provider: "{{ netconf }}"
   register: result
 
 - assert:
@@ -42,7 +42,8 @@
     lines:
       - "set system host-name {{ inventory_hostname }}"
       - "delete interfaces lo0"
-    provider: "{{ cli }}"
+    force: yes
+    provider: "{{ netconf }}"
   register: test
 
-- debug: msg="END cli/multiple.yaml"
+- debug: msg="END netconf/multiple.yaml"

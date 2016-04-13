@@ -1,12 +1,12 @@
 ---
-- debug: msg="START cli/backup.yaml"
+- debug: msg="START netconf/backup.yaml"
 
 - name: setup
   junos_config:
     lines:
       - set system host-name {{ inventory_hostname }}
       - delete interfaces lo0
-    provider: "{{ cli }}"
+    provider: "{{ netconf }}"
 
 - name: collect any backup files
   find:
@@ -25,7 +25,7 @@
 - name: configure using template with backup
   junos_template:
     src: basic/config.j2
-    provider: "{{ cli }}"
+    provider: "{{ netconf }}"
     backup: yes
   register: result
 
@@ -50,6 +50,6 @@
     lines:
       - set system host-name {{ inventory_hostname }}
       - delete interfaces lo0
-    provider: "{{ cli }}"
+    provider: "{{ netconf }}"
 
-- debug: msg="END cli/backup.yaml"
+- debug: msg="END netconf/backup.yaml"

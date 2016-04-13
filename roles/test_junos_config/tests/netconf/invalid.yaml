@@ -1,11 +1,11 @@
 ---
-- debug: msg="START cli/invalid.yaml"
+- debug: msg="START netconf/invalid.yaml"
 
 - name: configure single invalid command
   junos_config:
     lines:
       - 'set system foo'
-    provider: "{{ cli }}"
+    provider: "{{ netconf }}"
   register: result
   ignore_errors: yes
 
@@ -18,7 +18,7 @@
     lines:
       - 'set system host-name {{ inventory_hostname }}'
       - 'set system foo'
-    provider: "{{ cli }}"
+    provider: "{{ netconf }}"
   register: result
   ignore_errors: yes
 
@@ -26,4 +26,4 @@
     that:
       - "result.failed == true"
 
-- debug: msg="END cli/invalid.yaml"
+- debug: msg="END netconf/invalid.yaml"

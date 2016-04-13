@@ -1,17 +1,17 @@
 ---
-- debug: msg="START cli/basic.yaml"
+- debug: msg="START netconf/basic.yaml"
 
 - name: setup
   junos_config:
     lines:
       - set system host-name {{ inventory_hostname }}
       - delete interfaces lo0
-    provider: "{{ cli }}"
+    provider: "{{ netconf }}"
 
 - name: configure basic config template
   junos_template:
     src: basic/config.j2
-    provider: "{{ cli }}"
+    provider: "{{ netconf }}"
   register: result
 
 - assert:
@@ -22,7 +22,7 @@
 - name: check basic config template idempotent
   junos_template:
     src: basic/config.j2
-    provider: "{{ cli }}"
+    provider: "{{ netconf }}"
   register: result
 
 - assert:
@@ -34,6 +34,6 @@
     lines:
       - set system host-name {{ inventory_hostname }}
       - delete interfaces lo0
-    provider: "{{ cli }}"
+    provider: "{{ netconf }}"
 
-- debug: msg="END cli/basic.yaml"
+- debug: msg="END netconf/basic.yaml"

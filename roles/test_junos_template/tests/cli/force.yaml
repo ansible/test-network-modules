@@ -1,14 +1,12 @@
 ---
-- debug: msg="START cli/basic.yaml"
+- debug: msg="START cli/force.yaml"
 
 - name: setup
   junos_config:
     lines:
+      - set system host-name {{ inventory_hostname }}
       - delete interfaces lo0
-    force: yes
     provider: "{{ cli }}"
-  register: test
-- debug: var=test
 
 - name: configure basic config template
   junos_template:
@@ -34,4 +32,12 @@
       - "result.changed == true"
       - "'set interfaces lo0 unit 0 family inet address 1.1.1.1/32' in result.updates"
 
-- debug: msg="END cli/basic.yaml"
+- name: teardown
+  junos_config:
+    lines:
+      - set system host-name {{ inventory_hostname }}
+      - delete interfaces lo0
+    force: yes
+    provider: "{{ cli }}"
+
+- debug: msg="END cli/force.yaml"

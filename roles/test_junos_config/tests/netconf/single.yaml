@@ -1,17 +1,17 @@
 ---
-- debug: msg="START cli/single.yaml"
+- debug: msg="START netconf/single.yaml"
 
 - name: setup
   junos_config:
     lines:
       - set system host-name {{ inventory_hostname }}
-    provider: "{{ cli }}"
+    provider: "{{ netconf }}"
 
 - name: configure single command
   junos_config:
     lines:
       - set system host-name localhost
-    provider: "{{ cli }}"
+    provider: "{{ netconf }}"
   register: result
 
 - assert:
@@ -23,7 +23,7 @@
   junos_config:
     lines:
       - set system host-name localhost
-    provider: "{{ cli }}"
+    provider: "{{ netconf }}"
   register: result
 
 - assert:
@@ -34,7 +34,7 @@
   junos_config:
     lines:
       - set system host-name {{ inventory_hostname }}
-    provider: "{{ cli }}"
+    provider: "{{ netconf }}"
 
 
-- debug: msg="END cli/single.yaml"
+- debug: msg="END netconf/single.yaml"

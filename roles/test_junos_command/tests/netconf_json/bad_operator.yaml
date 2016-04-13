@@ -1,0 +1,21 @@
+---
+- debug: msg="START netconfig_json/bad_operator.yaml"
+
+- name: test bad operator with json encoding
+  junos_command:
+    commands:
+      - show version
+      - show interfaces fxp0
+    waitfor:
+      - "result[1].interface-information[0].physical-interface[0].name[0].data foo fxp0"
+    encoding: json
+    provider: "{{ netconf }}"
+  register: result
+  ignore_errors: yes
+
+- assert:
+    that:
+      - "result.failed == true"
+      - "result.msg is defined"
+
+- debug: msg="END netconfig_json/bad_operator.yaml"

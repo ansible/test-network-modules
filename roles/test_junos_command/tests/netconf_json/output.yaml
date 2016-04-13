@@ -1,0 +1,32 @@
+---
+- debug: msg="START netconfig_json/output.yaml"
+
+- name: get output for single command
+  junos_command:
+    commands: ['show version']
+    encoding: json
+    provider: "{{ netconf }}"
+  register: result
+
+- assert:
+    that:
+      - "result.changed == false"
+      - "result.stdout is defined"
+      - "result.stdout_lines is defined"
+
+- name: get output for multiple commands
+  junos_command:
+    commands:
+      - show version
+      - show route
+    encoding: json
+    provider: "{{ netconf }}"
+  register: result
+
+- assert:
+    that:
+      - "result.changed == false"
+      - "result.stdout is defined"
+      - "result.stdout_lines is defined"
+
+- debug: msg="END netconfig_json/output.yaml"

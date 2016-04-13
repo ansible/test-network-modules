@@ -1,3 +1,6 @@
 ---
 - { include: cli.yaml, tags: ['cli'] }
+- { include: netconf_xml.yaml, tags: ['netconf', 'xml'] }
+- { include: netconf_json.yaml, tags: ['netconf', 'json'] }
+- { include: netconf_text.yaml, tags: ['netconf', 'text'] }
 
