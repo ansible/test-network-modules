@@ -1,0 +1,29 @@
+---
+- debug: msg="START get_config.yaml"
+
+- name: setup test
+  eos_config:
+      lines: ['hostname foo']
+      provider: "{{ cli }}"
+
+- name: config test
+  eos_test:
+      test: get_config
+      provider: "{{ cli }}"
+  register: result
+
+- assert:
+    that:
+        - "'! device: foo' in result.output"
+
+- name: config test
+  eos_test:
+      test: get_config
+      provider: "{{ eapi }}"
+  register: result
+
+- assert:
+    that:
+        - "'! device: foo' in result.output.output"
+
+- debug: msg="END get_config.yaml"
