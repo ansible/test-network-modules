@@ -6,24 +6,27 @@
       lines: ['hostname foo']
       provider: "{{ cli }}"
 
-- name: config test
+- name: config test (CLI)
   eos_test:
       test: get_config
       provider: "{{ cli }}"
   register: result
-
 - assert:
     that:
         - "'! device: foo' in result.output"
 
-- name: config test
+- name: config test (EAPIT)
   eos_test:
       test: get_config
       provider: "{{ eapi }}"
   register: result
-
 - assert:
     that:
         - "'! device: foo' in result.output.output"
+
+- name: teardown test
+  eos_config:
+      lines: ['hostname {{ inventory_hostname }}']
+      provider: "{{ cli }}"
 
 - debug: msg="END get_config.yaml"
