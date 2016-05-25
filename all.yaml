@@ -1,7 +1,7 @@
 ---
+- { include: asa.yaml }
 - { include: eos.yaml }
 - { include: ios.yaml }
 - { include: iosxr.yaml }
 - { include: nxos.yaml }
 - { include: junos.yaml }
-
