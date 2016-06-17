@@ -1,17 +1,31 @@
 ---
-- debug: msg="START eapi/sublevel.yaml"
+- debug: msg="START load_config.yaml"
 
 - name: setup test
   eos_config:
     lines: ['no ip access-list test']
     provider: "{{ cli }}"
-    force: yes
 
-- name: configure sub level command
+- name: configure command (CLI)
+  eos_test:
+    test: 'load_config'
+    provider: "{{ cli }}"
+  register: result
+
+- assert:
+    that:
+      - "result.changed == true"
+      - "'ip access-list test' in result.updates"
+      - "'10 permit ip any any log' in result.updates"
+
+- name: setup test
   eos_config:
-    lines: ['10 permit ip any any log']
-    parents: ['ip access-list test']
-    after: ['exit']
+    lines: ['no ip access-list test']
+    provider: "{{ cli }}"
+
+- name: configure command (EAPI)
+  eos_test:
+    test: 'load_config'
     provider: "{{ eapi }}"
   register: result
 
@@ -21,15 +35,4 @@
       - "'ip access-list test' in result.updates"
       - "'10 permit ip any any log' in result.updates"
 
-- name: configure sub level command idempotent check
-  eos_config:
-    lines: ['10 permit ip any any log']
-    parents: ['ip access-list test']
-    provider: "{{ eapi }}"
-  register: result
-
-- assert:
-    that:
-      - "result.changed == false"
-
-- debug: msg="END eapi/sublevel.yaml"
+- debug: msg="END load_config.yaml"

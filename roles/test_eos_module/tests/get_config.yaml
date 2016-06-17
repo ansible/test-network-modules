@@ -3,7 +3,7 @@
 
 - name: setup test
   eos_config:
-      lines: ['hostname foo']
+      lines: ['hostname {{ inventory_hostname }}']
       provider: "{{ cli }}"
 
 - name: config test (CLI)
@@ -13,7 +13,7 @@
   register: result
 - assert:
     that:
-        - "'! device: foo' in result.output"
+        - "'! device: {{ inventory_hostname }}' in result.output"
 
 - name: config test (EAPIT)
   eos_test:
@@ -22,11 +22,6 @@
   register: result
 - assert:
     that:
-        - "'! device: foo' in result.output.output"
-
-- name: teardown test
-  eos_config:
-      lines: ['hostname {{ inventory_hostname }}']
-      provider: "{{ cli }}"
+        - "'! device: {{ inventory_hostname }}' in result.output.output"
 
 - debug: msg="END get_config.yaml"
