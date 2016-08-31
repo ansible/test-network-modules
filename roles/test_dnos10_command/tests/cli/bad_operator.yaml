@@ -6,7 +6,7 @@
     commands:
       - show version
       - show interface ethernet 1/1/1
-    waitfor:
+    wait_for:
       - "result[0] contains 'Description : blah'"
     provider: "{{ cli }}"
   register: result

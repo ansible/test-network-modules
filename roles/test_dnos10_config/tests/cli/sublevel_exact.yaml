@@ -13,7 +13,7 @@
     before: ['no ip access-list test']
     after: ['exit']
     provider: "{{ cli }}"
-    force: yes
+    match: none
 
 - name: configure sub level command using exact match
   dnos10_config:
@@ -61,6 +61,6 @@
     lines:
       - no ip access-list test
     provider: "{{ cli }}"
-    force: yes
+    match: none
 
 - debug: msg="END cli/sublevel_exact.yaml"

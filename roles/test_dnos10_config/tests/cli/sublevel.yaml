@@ -6,7 +6,7 @@
     lines:
       - 'no ip access-list test'
     provider: "{{ cli }}"
-    force: yes
+    match: none
 
 - name: configure sub level command
   dnos10_config:
@@ -37,6 +37,6 @@
     lines:
       - 'no ip access-list test'
     provider: "{{ cli }}"
-    force: yes
+    match: none
 
 - debug: msg="END cli/sublevel.yaml"
