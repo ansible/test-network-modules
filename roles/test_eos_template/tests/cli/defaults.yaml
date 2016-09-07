@@ -8,7 +8,7 @@
       - shutdown
     parents:
       - interface Ethernet5
-    force: yes
+    match: none
     provider: "{{ cli }}"
 
 - name: configure device with defaults included

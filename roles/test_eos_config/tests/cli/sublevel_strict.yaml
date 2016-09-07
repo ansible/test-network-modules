@@ -1,7 +1,7 @@
 ---
 - debug: msg="START cli/sublevel_strict.yaml"
 
-- name: setup test
+- name: setup
   eos_config:
     lines:
       - 10 permit ip host 1.1.1.1 any log
@@ -9,11 +9,11 @@
       - 30 permit ip host 3.3.3.3 any log
       - 40 permit ip host 4.4.4.4 any log
       - 50 permit ip host 5.5.5.5 any log
-    parents: ['ip access-list test']
-    before: ['no ip access-list test']
-    after: ['exit']
+    parents: ip access-list test
+    before: no ip access-list test
+    after: exit
+    match: none
     provider: "{{ cli }}"
-    force: yes
 
 - name: configure sub level command using strict match
   eos_config:
@@ -22,9 +22,9 @@
       - 20 permit ip host 3.3.3.3 any log
       - 30 permit ip host 2.2.2.2 any log
       - 40 permit ip host 4.4.4.4 any log
-    parents: ['ip access-list test']
-    before: ['no ip access-list test']
-    after: ['exit']
+    parents: ip access-list test
+    before: no ip access-list test
+    after: exit
     match: strict
     replace: block
     provider: "{{ cli }}"
@@ -47,7 +47,7 @@
       - 20 permit ip host 3.3.3.3 any log
       - 30 permit ip host 2.2.2.2 any log
       - 40 permit ip host 4.4.4.4 any log
-    parents: ['ip access-list test']
+    parents: ip access-list test
     match: strict
     provider: "{{ cli }}"
   register: result
@@ -55,5 +55,11 @@
 - assert:
     that:
       - "result.changed == false"
+
+- name: teardown
+  eos_config:
+    lines: no ip access-list test
+    match: none
+    provider: "{{ cli }}"
 
 - debug: msg="END cli/sublevel_strict.yaml"
