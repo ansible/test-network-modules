@@ -1,15 +1,15 @@
 ---
 - debug: msg="START eapi/toplevel.yaml"
 
-- name: setup test
+- name: setup
   eos_config:
-    lines: ['hostname {{ inventory_hostname }}']
+    lines: hostname {{ inventory_hostname }}
+    match: none
     provider: "{{ eapi }}"
-    force: yes
 
 - name: configure top level command
   eos_config:
-    lines: ['hostname foo']
+    lines: hostname foo
     provider: "{{ eapi }}"
   register: result
 
@@ -20,12 +20,18 @@
 
 - name: configure top level command idempotent check
   eos_config:
-    lines: ['hostname foo']
+    lines: hostname foo
     provider: "{{ eapi }}"
   register: result
 
 - assert:
     that:
       - "result.changed == false"
+
+- name: setup
+  eos_config:
+    lines: hostname {{ inventory_hostname }}
+    match: none
+    provider: "{{ eapi }}"
 
 - debug: msg="END eapi/toplevel.yaml"
