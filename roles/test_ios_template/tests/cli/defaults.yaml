@@ -3,8 +3,7 @@
 
 - name: setup
   ios_config:
-    commands:
-      - no interface Loopback999
+    commands: no interface Loopback999
     force: yes
     provider: "{{ cli }}"
   ignore_errors: yes
@@ -15,8 +14,6 @@
     include_defaults: yes
     provider: "{{ cli }}"
   register: result
-
-- debug: var=result
 
 - assert:
     that:
@@ -30,8 +27,6 @@
     provider: "{{ cli }}"
   register: result
 
-- debug: var=result
-
 - assert:
     that:
       - "result.changed == false"
@@ -39,8 +34,7 @@
 
 - name: teardown
   ios_config:
-    commands:
-      - no interface Loopback999
+    commands: no interface Loopback999
     force: yes
     provider: "{{ cli }}"
 
