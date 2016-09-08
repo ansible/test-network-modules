@@ -8,7 +8,7 @@
       - shutdown
     parents:
       - interface Ethernet2/5
-    force: yes
+    match: none
     provider: "{{ nxapi }}"
 
 - name: configure device with defaults included
