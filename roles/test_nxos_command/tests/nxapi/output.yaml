@@ -10,7 +10,7 @@
 - assert:
     that:
       - "result.changed == false"
-      - "result.result is defined"
+      - "result.stdout is defined"
 
 - name: get output for multiple commands
   nxos_command:
@@ -23,6 +23,6 @@
 - assert:
     that:
       - "result.changed == false"
-      - "result.result is defined"
+      - "result.stdout is defined"
 
 - debug: msg="END nxapi/output.yaml"
