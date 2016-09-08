@@ -12,7 +12,7 @@
     parents: ip access-list test
     before: no ip access-list test
     provider: "{{ eapi }}"
-    force: yes
+    match: none
 
 - name: configure sub level command using strict match
   eos_config:
