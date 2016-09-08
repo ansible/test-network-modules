@@ -1,6 +1,8 @@
 # test-network-modules
 
-Playbooks for testing Ansible network modules
+Playbooks for testing Ansible Nntwork modules
+
+For more infomation about using Ansible to mananage your network infrastructre please see https://www.ansible.com/network
 
 ```
 $ ansible-playbook all.yaml
@@ -22,21 +24,21 @@ $ ansible-playbook all.yaml --tags="cli" -e "limit_to=eos_command test_case=note
 ## Contributing Test Cases 
 
 Test cases are added to roles based on the module being testing. Test cases
-should include both `cli` and `nxapi` test cases. Cli test cases should be
-added to role/tests/cli and eapi tests should be added to
-role/tests/eapi.
+should include both `cli` and `eapi` test cases. Cli test cases should be
+added to `role/tests/cli` and eapi tests should be added to
+`role/tests/eapi`.
 
 ### Conventions
 
 - Each test case should generally follow the pattern:
 
-  >setup —> test —> assert —> test again (idempotent) —> assert —> done
+  >setup —> test —> assert —> test again (idempotent) —> assert —> -teardown (if needed) -> done
 
   This keeps test playbooks from becoming monolithic and difficult to
   troubleshoot.
 
 - Include a name for each task that is not an assertion. (It's OK to add names
-  to assertsion too. But to make it easy to identify the broken task within a failed
+  to assertions too. But to make it easy to identify the broken task within a failed
   test, at least provide a helpful name for each task.)
 
 ## License
