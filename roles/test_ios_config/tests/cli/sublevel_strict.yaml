@@ -9,11 +9,10 @@
       - permit ip host 3.3.3.3 any log
       - permit ip host 4.4.4.4 any log
       - permit ip host 5.5.5.5 any log
-    parents: ['ip access-list extended test']
-    before: ['no ip access-list extended test']
-    after: ['exit']
+    parents: ip access-list extended test
+    before: no ip access-list extended test
+    match: none
     provider: "{{ cli }}"
-    force: yes
 
 - name: configure sub level command using strict match
   ios_config:
@@ -22,7 +21,7 @@
       - permit ip host 2.2.2.2 any log
       - permit ip host 3.3.3.3 any log
       - permit ip host 4.4.4.4 any log
-    parents: ['ip access-list extended test']
+    parents: ip access-list extended test
     match: strict
     provider: "{{ cli }}"
   register: result
@@ -37,8 +36,8 @@
       - permit ip host 1.1.1.1 any log
       - permit ip host 3.3.3.3 any log
       - permit ip host 2.2.2.2 any log
-    parents: ['ip access-list extended test']
-    after: ['exit']
+    parents: ip access-list extended test
+    after: exit
     match: strict
     provider: "{{ cli }}"
   register: result
@@ -55,9 +54,8 @@
 
 - name: teardown
   ios_config:
-    lines:
-      - no ip access-list extended test
+    lines: no ip access-list extended test
+    match: none
     provider: "{{ cli }}"
-    force: yes
 
 - debug: msg="END cli/sublevel_strict.yaml"
