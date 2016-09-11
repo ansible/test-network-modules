@@ -1,5 +1,8 @@
 ---
 - { include: asa.yaml }
+- { include: dnos10.yaml }
+- { include: dnos6.yaml }
+- { include: dnos9.yaml }
 - { include: eos.yaml }
 - { include: ios.yaml }
 - { include: iosxr.yaml }
