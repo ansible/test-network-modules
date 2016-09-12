@@ -8,3 +8,6 @@
 - { include: iosxr.yaml }
 - { include: nxos.yaml }
 - { include: junos.yaml }
+- { include: dnos10.yaml }
+- { include: dnos9.yaml }
+- { include: dnos6.yaml }
