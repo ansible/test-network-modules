@@ -1,7 +1,6 @@
 ---
 - debug: msg="START eapi/not_hardware_facts.yaml"
 
-# FIXME: Split into multiple tests, or renaming gather_subset?
 
 - name: test not hardware
   eos_facts:

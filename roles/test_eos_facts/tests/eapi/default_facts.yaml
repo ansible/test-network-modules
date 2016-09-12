@@ -7,15 +7,6 @@
     provider: "{{ eapi }}"
   register: result
 
-- name: "XOXO: What did we get?"
-  debug:
-    msg: "{{ result }}"
-
-# FIXME Remove writing to /tmp before putting live
-- copy:
-    content: "{{ result }}"
-    dest: "/tmp/facts_default"
-
 - assert:
     that:
       # _facts modules should never report a change

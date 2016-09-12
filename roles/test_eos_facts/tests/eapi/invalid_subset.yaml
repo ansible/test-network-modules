@@ -21,6 +21,7 @@
       - "result.msg == 'Bad subset'"
 
 ###############
+
 - name: test subset specified multiple times
   eos_facts:
     provider: "{{ eapi }}"
@@ -29,9 +30,6 @@
       - "hardware"
   register: result
   ignore_errors: true
-- name: "XOXO: What did we get?"
-  debug:
-    msg: "{{ result }}"
 
 - assert:
     that:
@@ -42,7 +40,13 @@
       # Sensible Failure message
       - "result.msg == 'Bad subset'"
 
-# FIXME gather_subset: - "!hardware"\n"hardware
+###############
+
+# FIXME Future
+# We may in the future want to add a test for
+# gather_subset:
+#   - "!hardware"
+#   - "hardware"
 
 
 

@@ -10,10 +10,6 @@
   register: result
 
 
-# FIXME Remove writing to /tmp before putting live
-- copy:
-    content: "{{ result }}"
-    dest: "/tmp/facts_all"
 
 - assert:
     that:
