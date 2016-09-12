@@ -1,10 +1,10 @@
 ---
-- debug: msg="START eapi/not_hardware_facts.yaml"
+- debug: msg="START cli/not_hardware_facts.yaml"
 
 
 - name: test not hardware
   eos_facts:
-    provider: "{{ eapi }}"
+    provider: "{{ cli }}"
     gather_subset:
       - "!hardware"
   register: result
@@ -31,4 +31,4 @@
       # ... and not present
       - "result.ansible_facts.ansible_net_filesystems is not defined"
 
-- debug: msg="END eapi/not_hardware_facts.yaml"
+- debug: msg="END cli/not_hardware_facts.yaml"
