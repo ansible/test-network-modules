@@ -1,47 +1,6 @@
 ---
 - debug: msg="START eapi/all_facts.yaml"
 
-# FIXME: Split into multiple tests, or renaming gather_subset?
-
-- name: test getting default facts
-  eos_facts:
-    provider: "{{ eapi }}"
-  register: result
-
-- name: "XOXO: What did we get?"
-  debug:
-    msg: "{{ result }}"
-
-- copy:
-    content: "{{ result }}"
-    dest: "/tmp/facts_default"
-
-- assert:
-    that:
-      # _facts modules should never report a change
-      - "result.changed == false"
-
-      # Correct subsets are present
-      - "'hardware' in result.ansible_facts.ansible_net_gather_subset"
-      - "'default' in result.ansible_facts.ansible_net_gather_subset"
-      - "'interfaces' in result.ansible_facts.ansible_net_gather_subset"
-      - "result.ansible_facts.ansible_net_filesystems is defined"
-      # ... and not present
-      - "'config' not in result.ansible_facts.ansible_net_gather_subset"
-
-      # Items from those subsets are present
-      - "result.ansible_facts.ansible_net_filesystems is defined" #hw
-      - "result.ansible_facts.ansible_net_memtotal_mb > 10" #hw
-      - "result.ansible_facts.ansible_net_interfaces.Ethernet1.ipv4.masklen > 1" # interfaces
-
-      # ... and not present
-      - "result.ansible_facts.ansible_net_config is not defined" # config
-
-      # We use this as an example of a fact that should be available
-
-
-#----------------------
-
 
 - name: test getting all facts
   eos_facts:
@@ -50,6 +9,8 @@
       - all
   register: result
 
+
+# FIXME Remove writing to /tmp before putting live
 - copy:
     content: "{{ result }}"
     dest: "/tmp/facts_all"
@@ -65,76 +26,10 @@
       - "'default' in result.ansible_facts.ansible_net_gather_subset"
       - "'interfaces' in result.ansible_facts.ansible_net_gather_subset"
 
-
-
       # Items from those subsets are present
       - "result.ansible_facts.ansible_net_filesystems is defined"
       # Check that these facts not only are present, but are valid (positive integers)
       - "result.ansible_facts.ansible_net_memfree_mb > 1"
       - "result.ansible_facts.ansible_net_memtotal_mb > 1"
-
-
-- name: "XOXO: all facts"
-  debug:
-    msg: "{{ result }}"
-
-
-#----------------------
-- name: test not hardware
-  eos_facts:
-    provider: "{{ eapi }}"
-    gather_subset:
-      - "!hardware"
-  register: result
-
-- copy:
-    content: "{{ result }}"
-    dest: "/tmp/facts_nohw"
-
-  #  !ansible_net_gather_subset.hardware
-  #!ansible_net_filesystems
-
-- name: "XOXO: !hardware"
-  debug:
-    msg: "{{ result }}"
-
-
-#----------------------
-# Multiple gather_subset's
-
-#----------------------
-# gather_subset: - "!hardware"\n"hardware
-
-
-#----------------------
-- name: test something invalid
-  eos_facts:
-    provider: "{{ eapi }}"
-    gather_subset:
-      - "somethinginvalid"
-  register: result
-  ignore_errors: true
-
-- name: "XOXO: somethinginvalid"
-  debug:
-    msg: "{{ result }}"
-
-# FIXME: Ensure we get failed && msg:"Bad subset"
-
-- assert:
-    that:
-      # Failures shouldn't return changes
-      - "result.changed == false"
-      # It's a failure
-      - "result.failed == true"
-      # Sensible Failure message
-      - "result.msg == 'Bad subset'"
-
-
-
-
-- fail:
-    msg: "gundalow - all done"
-
 
 - debug: msg="END eapi/all_facts.yaml"
