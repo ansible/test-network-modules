@@ -21,9 +21,8 @@
 - assert:
     that:
       - "result.changed == true"
-# FIXME Currently failing
 # https://github.com/ansible/ansible-modules-core/issues/4807
-#      - "result.updates is defined"
+      - "result.updates is not defined"
 
 - name: check device with config
   eos_config:
@@ -35,8 +34,7 @@
 - assert:
     that:
       - "result.changed == true"
-# FIXME Currently failing
 # https://github.com/ansible/ansible-modules-core/issues/4807
-#      - "result.updates is defined"
+      - "result.updates is not defined"
 
 - debug: msg="END cli/src_match_none.yaml"
