@@ -1,0 +1,33 @@
+---
+- debug: msg="START cli/more_system.yaml"
+
+- name: setup
+  asa_config:
+    lines:
+      - "clear configure tunnel-group 1.1.1.1"
+    provider: "{{ cli }}"
+
+- name: Setup tunnel-group
+  asa_config:
+    before: tunnel-group 1.1.1.1 type ipsec-l2l
+    parents: tunnel-group 1.1.1.1 type ipsec-l2l
+    lines:
+      - "ikev1 pre-shared-key abc123"
+    show_command: "more system:running-config"
+    provider: "{{ cli }}"
+
+- name: Test idempotency
+  asa_config:
+    before: tunnel-group 1.1.1.1 type ipsec-l2l
+    parents: tunnel-group 1.1.1.1 type ipsec-l2l
+    lines:
+      - "ikev1 pre-shared-key abc123"
+    show_command: "more system:running-config"
+    provider: "{{ cli }}"
+  register: result
+
+- assert:
+    that:
+      - "result.changed == false"
+
+- debug: msg="END cli/more_system.yaml"

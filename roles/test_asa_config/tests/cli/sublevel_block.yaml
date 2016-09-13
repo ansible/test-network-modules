@@ -2,12 +2,19 @@
 - debug: msg="START cli/sublevel_block.yaml"
 
 - name: setup
+  asa_command:
+    commands:
+      - show run object-group
+    provider: "{{ cli }}"
+  register: object_group
+
+- name: setup
   asa_config:
     lines:
       - no object-group network OG-ANSIBLE
-    after: ['exit']
+    match: none
     provider: "{{ cli }}"
-    force: yes
+  #when: "'object-group network OG-ANSIBLE\n' in {{ object_group.stdout }}"
 
 - name: configure sub level command using block replace
   asa_config:
@@ -52,7 +59,6 @@
   asa_config:
     lines:
       - no object-group network OG-ANSIBLE
-    force: yes
     provider: "{{ cli }}"
 
 - debug: msg="END cli/sublevel_block.yaml"

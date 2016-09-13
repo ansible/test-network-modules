@@ -7,7 +7,6 @@
       - "snmp-server contact ansible"
       - "hostname firewall"
     provider: "{{ cli }}"
-    force: yes
 
 - name: configure top level command with before
   asa_config:
@@ -39,6 +38,5 @@
       - "no snmp-server contact"
       - "hostname {{ inventory_hostname }}"
     provider: "{{ cli }}"
-    force: yes
 
 - debug: msg="END cli/toplevel_after.yaml"
