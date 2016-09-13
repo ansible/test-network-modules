@@ -14,6 +14,6 @@
     that:
       - "result.changed == false"
       - "result.failed == true"
-      - "result.msg = 'path specified in src not found'"
+      - "result.msg == 'path specified in src not found'"
 
 - debug: msg="END cli/src_invalid.yaml"
