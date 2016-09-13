@@ -21,6 +21,8 @@
       - "result.msg == 'Bad subset'"
 
 ###############
+# FIXME Future
+# We may in the future want to add a test for
 
 - name: test subset specified multiple times
   eos_facts:
@@ -39,14 +41,7 @@
       - "result.failed == true"
       # Sensible Failure message
       - "result.msg == 'Bad subset'"
-
-###############
-
-# FIXME Future
-# We may in the future want to add a test for
-# gather_subset:
-#   - "!hardware"
-#   - "hardware"
+  ignore_errors: true
 
 
 
