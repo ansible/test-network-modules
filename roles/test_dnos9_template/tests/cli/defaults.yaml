@@ -1,0 +1,46 @@
+---
+- debug: msg="START cli/defaults.yaml"
+
+- name: setup
+  dnos9_config:
+    commands:
+      - interface Loopback 999
+      - no interface Loopback 999
+    match: none
+    provider: "{{ cli }}"
+  ignore_errors: yes
+
+- name: configure device with defaults included
+  dnos9_template:
+    src: defaults/config.j2
+    provider: "{{ cli }}"
+  register: result
+
+- debug: var=result
+
+- assert:
+    that:
+      - "result.changed == true"
+      - "result.updates is defined"
+
+- name: check device with defaults included
+  dnos9_template:
+    src: defaults/config.j2
+    provider: "{{ cli }}"
+  register: result
+
+- debug: var=result
+
+- assert:
+    that:
+      - "result.changed == false"
+      - "result.updates is defined"
+
+- name: teardown
+  dnos9_config:
+    commands:
+      - no interface Loopback 999
+    match: none
+    provider: "{{ cli }}"
+
+- debug: msg="END cli/defaults.yaml"
