@@ -5,7 +5,7 @@
   eos_command:
     commands:
       - show version
-    waitfor:
+    wait_for:
       - "result[0].version foo 4.15"
     retries: 1
     provider: "{{ eapi }}"

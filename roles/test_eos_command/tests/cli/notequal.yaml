@@ -6,7 +6,7 @@
     commands:
       - show version
       - show interfaces Management1 | json
-    waitfor:
+    wait_for:
       - "result[1].interfaces.Management1.name neq Ethernet"
     provider: "{{ cli }}"
   register: result
@@ -21,7 +21,7 @@
     commands:
       - show version
       - show interfaces Management1 | json
-    waitfor:
+    wait_for:
       - "result[1].interfaces.Management1.name != Ethernet"
     provider: "{{ cli }}"
   register: result
