@@ -32,9 +32,4 @@
     that:
       - "result.changed == true"
 
-
-- name: fail now
-  fail:
-    msg: WIP
-
 - debug: msg="END cli/save.yaml"
