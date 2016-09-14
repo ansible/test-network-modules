@@ -13,7 +13,6 @@
     before: ['no object-group network OG-ANSIBLE-EXACT']
     after: ['exit']
     provider: "{{ cli }}"
-    force: yes
 
 - name: configure sub level command using exact match
   asa_config:
@@ -61,6 +60,5 @@
     lines:
       - no object-group network OG-ANSIBLE-EXACT
     provider: "{{ cli }}"
-    force: yes
 
 - debug: msg="END cli/sublevel_exact.yaml"

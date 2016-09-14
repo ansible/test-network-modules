@@ -13,7 +13,6 @@
     before: ['no object-group network OG-ANSIBLE-STRICT']
     after: ['exit']
     provider: "{{ cli }}"
-    force: yes
 
 - name: configure sub level command using strict match
   asa_config:
@@ -58,6 +57,5 @@
     lines:
       - no object-group network OG-ANSIBLE-STRICT
     provider: "{{ cli }}"
-    force: yes
 
 - debug: msg="END cli/sublevel_strict.yaml"

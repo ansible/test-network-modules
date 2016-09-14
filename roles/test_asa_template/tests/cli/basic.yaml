@@ -5,7 +5,6 @@
   asa_config:
     commands:
       - no object-group network OG-ANSIBLE-TEMPLATE
-    force: yes
     provider: "{{ cli }}"
   ignore_errors: yes
 
@@ -35,7 +34,6 @@
   asa_config:
     commands:
       - no object-group network OG-ANSIBLE-TEMPLATE
-    force: yes
     provider: "{{ cli }}"
 
 - debug: msg="END cli/basic.yaml"

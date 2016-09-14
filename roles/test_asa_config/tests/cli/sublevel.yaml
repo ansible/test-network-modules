@@ -6,7 +6,6 @@
     lines:
       - 'no object-group network OG-ANSIBLE-SUBLEVEL'
     provider: "{{ cli }}"
-    force: yes
 
 - name: configure sub level command
   asa_config:
@@ -37,6 +36,5 @@
     lines:
       - 'no object-group network OG-ANSIBLE-SUBLEVEL'
     provider: "{{ cli }}"
-    force: yes
 
 - debug: msg="END cli/sublevel.yaml"
