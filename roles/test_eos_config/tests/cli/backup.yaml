@@ -25,7 +25,7 @@
   with_items: backup_files.files
 
 - name: configure device with config
-  eos_template:
+  eos_config:
     src: basic/config.j2
     backup: yes
     provider: "{{ cli }}"
