@@ -33,7 +33,7 @@
     that:
       - "result.changed == false"
 
-- name: setup
+- name: teardown
   eos_config:
     lines:
       - no snmp-server contact ansible

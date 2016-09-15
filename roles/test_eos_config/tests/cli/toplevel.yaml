@@ -34,6 +34,4 @@
     match: none
     provider: "{{ cli }}"
 
-
-
 - debug: msg="END cli/toplevel.yaml"
