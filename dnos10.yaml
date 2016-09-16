@@ -10,5 +10,6 @@
    - { role: test_dnos10_command, when: "limit_to in ['*', 'dnos10_command']" }
    - { role: test_dnos10_config, when: "limit_to in ['*', 'dnos10_config']" }
    - { role: test_dnos10_template, when: "limit_to in ['*', 'dnos10_template']" }
+   - { role: test_dnos10_facts, when: "limit_to in ['*', 'dnos10_facts']" }
 
 
