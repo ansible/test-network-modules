@@ -1,6 +1,6 @@
 # test-network-modules
 
-Playbooks for testing Ansible Nntwork modules
+Playbooks for testing Ansible Network modules
 
 For more infomation about using Ansible to mananage your network infrastructre please see https://www.ansible.com/network
 
@@ -8,7 +8,7 @@ For more infomation about using Ansible to mananage your network infrastructre p
 $ ansible-playbook all.yaml
 ```
 
-To filter a set of test cases set limit_to to the name of the group (i.e. command, section, eapi, etc.): 
+To filter a set of test cases set `limit_to` to the name of the group, generally this is the name of the module: 
 
 ```
 $ ansible-playbook all.yaml -e "limit_to=eos_command"
