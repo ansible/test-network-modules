@@ -42,7 +42,7 @@ added to `role/tests/cli` and eapi tests should be added to
   test, at least provide a helpful name for each task.)
 
 - Files containing test cases must end in `.yaml`
-- 
+
 ## License
 
 Provided under the [GPLv3](https://github.com/ansible-testing/test-eos/blob/master/LICENSE) license. 
