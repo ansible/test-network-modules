@@ -1,0 +1,15 @@
+---
+- hosts: dellos9
+  gather_facts: no
+  connection: local
+
+  vars:
+    limit_to: "*"
+
+  roles:
+   - { role: test_dellos9_command, when: "limit_to in ['*', 'dellos9_command']" }
+   - { role: test_dellos9_config, when: "limit_to in ['*', 'dellos9_config']" }
+   - { role: test_dellos9_template, when: "limit_to in ['*', 'dellos9_template']" }
+   - { role: test_dellos9_facts, when: "limit_to in ['*', 'dellos9_facts']" }
+
+
