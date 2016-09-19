@@ -19,7 +19,7 @@
 
 - name: Expect EAPI state is off
   assert:
-    that: http_config.result[0].enabled == false
+    that: http_config.stdout[0].enabled == false
 
 - name: Set state to stopped again
   eos_eapi:
@@ -33,6 +33,7 @@
 
 - name: Expect action to be idempotent
   assert:
-      that: eos_eapi_output.commands | length == 0
+    that:
+      - "eos_eapi_output.changed == false"
 
 - debug: msg="STOP CLI/ENABLE.YAML"
