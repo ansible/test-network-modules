@@ -19,10 +19,10 @@
 
 - name: Expect endpoint ports to be set
   assert:
-      that:
-          - http_config.result[0].httpServer.port == 81
-          - http_config.result[0].httpsServer.port == 4443
-          - http_config.result[0].localHttpServer.port == 8181
+    that:
+        - http_config.stdout[0].httpServer.port == 81
+        - http_config.stdout[0].httpsServer.port == 4443
+        - http_config.stdout[0].localHttpServer.port == 8181
 
 - name: Change endpoint ports again
   eos_eapi:
@@ -36,6 +36,7 @@
 
 - name: Expect action to be idempotent
   assert:
-      that: eos_eapi_output.commands | length == 0
+    that:
+      - "eos_eapi_output.changed == false"
 
 - debug: msg="END CLI/CONFIGURE.YAML"
