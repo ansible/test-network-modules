@@ -4,7 +4,7 @@
     - name: collect all cli test cases
       find:
           paths: "{{ role_path }}/tests/cli"
-          patterns: '*.yml'
+          patterns: '*.yaml'
       register: test_cases
       delegate_to: localhost
 
@@ -18,7 +18,7 @@
     - name: run specific cli test case
       find:
           paths: "{{ role_path }}/tests/cli"
-          patterns: '{{ testcase }}.yml'
+          patterns: '{{ testcase }}.yaml'
       register: test_cases
       delegate_to: localhost
 
