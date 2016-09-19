@@ -2,6 +2,8 @@
 
 - name: Change endpoint ports
   eos_eapi:
+# FIXME https://github.com/ansible/ansible-modules-core/issues/4905
+    enable_http: true # HACK
     http_port: 81
     https_port: 4443
     enable_local_http: yes
@@ -26,6 +28,8 @@
 
 - name: Change endpoint ports again
   eos_eapi:
+# FIXME https://github.com/ansible/ansible-modules-core/issues/4905
+    enable_http: true # HACK
     http_port: 81
     https_port: 4443
     enable_local_http: yes
