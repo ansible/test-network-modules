@@ -36,6 +36,13 @@
   register: config
   connection: local
 
+- name: Set config
+  eos_eapi:
+    config: "{{ config.stdout[0] }}"
+    provider: "{{ cli }}"
+  register: config
+  connection: local
+
 
 - name: Idempotency check
   assert:
