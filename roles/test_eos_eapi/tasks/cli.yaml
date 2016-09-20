@@ -1,28 +1,15 @@
 ---
-- block:
-    # Run all tests
-    - name: collect all cli test cases
-      find:
-          paths: "{{ role_path }}/tests/cli"
-          patterns: '*.yaml'
-      register: test_cases
-      delegate_to: localhost
+- name: collect all cli test cases
+  find:
+    paths: "{{ role_path }}/tests/cli"
+    patterns: "{{ testcase }}.yaml"
+  register: test_cases
 
-    - name: run test case
-      include: "{{ item.path }}"
-      with_items: test_cases.files
-  when: testcase == ''
+- name: set test_items
+  set_fact: test_items="{{ test_cases.files | map(attribute='path') | list }}"
 
-- block:
-    # Run a single test
-    - name: run specific cli test case
-      find:
-          paths: "{{ role_path }}/tests/cli"
-          patterns: '{{ testcase }}.yaml'
-      register: test_cases
-      delegate_to: localhost
+- name: run test case
+  include: "{{ item }}"
+  with_items: "{{ test_items }}"
 
-    - name: run test case
-      include: "{{ item.path }}"
-      with_items: test_cases.files
-  when: testcase != ''
+
