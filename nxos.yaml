@@ -17,7 +17,8 @@
   roles:
     - { role: test_nxos_command, when: "limit_to in ['*', 'nxos_command']" }
     - { role: test_nxos_config, when: "limit_to in ['*', 'nxos_config']", tags: ['nxapi', 'cli']}
+    - { role: test_nxos_facts, when: "limit_to in ['*', 'nxos_facts']" }
     - { role: test_nxos_template, when: "limit_to in ['*', 'nxos_template']" }
-    #- { role: test_nxos_nxapi, when: "limit_to in ['*', 'nxos_nxapi']" }
+    - { role: test_nxos_nxapi, when: "limit_to in ['*', 'nxos_nxapi']" }
 
 
