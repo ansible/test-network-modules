@@ -33,7 +33,6 @@
     provider: "{{ cli }}"
   register: eos_eapi_output
   connection: local
-  ignore_errors: true
 
 - name: Ensure idempotent
   assert:
