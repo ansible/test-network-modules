@@ -5,6 +5,7 @@
 
   vars:
     limit_to: "*"
+    debug: false
 
   roles:
     - { role: test_iosxr_command, when: "limit_to in ['*', 'iosxr_command']" }

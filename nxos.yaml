@@ -5,6 +5,7 @@
 
   vars:
     limit_to: "*"
+    debug: false
 
   pre_tasks:
     - name: enable nxapi on remote device

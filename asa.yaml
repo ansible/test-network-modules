@@ -5,6 +5,7 @@
 
   vars:
     limit_to: "*"
+    debug: false
 
   roles:
     - { role: test_asa_command, when: "limit_to in ['*', 'asa_command']" }
