@@ -15,10 +15,10 @@
 - name: Assert NXAPI started with default config
   assert:
     that:
-      - result.result[0].nxapi_status == 'Enabled'
-      - result.result[0].http_port == 80
-      - result.result[0].https_port == 443
-      - result.result[0].sandbox_status == 'Enabled'
+      - result.stdout[0].nxapi_status == 'Enabled'
+      - result.stdout[0].http_port == 80
+      - result.stdout[0].https_port == 443
+      - result.stdout[0].sandbox_status == 'Enabled'
 
 - name: Rest config again
   nxos_nxapi:
@@ -27,6 +27,7 @@
 
 - name: Assert idempotence
   assert:
-    that: result.commands | length == 0
+    that:
+      result.changed == false
 
 - debug: msg="END cli/return.yaml"
