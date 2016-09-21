@@ -5,7 +5,7 @@
   nxos_config:
     lines: ['no ip access-list test']
     provider: "{{ nxapi }}"
-    force: yes
+    match: none
   ignore_errors: yes
 
 - name: configure sub level command
@@ -36,6 +36,6 @@
   nxos_config:
     lines: ['no ip access-list test']
     provider: "{{ nxapi }}"
-    force: yes
+    match: none
 
 - debug: msg="END nxapi/sublevel.yaml"
