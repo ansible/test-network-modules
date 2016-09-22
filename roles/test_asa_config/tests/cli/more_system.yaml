@@ -7,10 +7,17 @@
       - "clear configure tunnel-group 1.1.1.1"
     provider: "{{ cli }}"
 
-- name: Setup tunnel-group
+
+- name: Prepare tunnel-group
   asa_config:
     before: tunnel-group 1.1.1.1 type ipsec-l2l
-    parents: tunnel-group 1.1.1.1 type ipsec-l2l
+    lines:
+      - "tunnel-group 1.1.1.1 ipsec-attributes"
+    provider: "{{ cli }}"
+
+- name: Setup tunnel-group
+  asa_config:
+    parents: tunnel-group 1.1.1.1 ipsec-attributes
     lines:
       - "ikev1 pre-shared-key abc123"
     show_command: "more system:running-config"
@@ -18,8 +25,7 @@
 
 - name: Test idempotency
   asa_config:
-    before: tunnel-group 1.1.1.1 type ipsec-l2l
-    parents: tunnel-group 1.1.1.1 type ipsec-l2l
+    parents: tunnel-group 1.1.1.1 ipsec-attributes
     lines:
       - "ikev1 pre-shared-key abc123"
     show_command: "more system:running-config"
@@ -29,5 +35,12 @@
 - assert:
     that:
       - "result.changed == false"
+
+- name: teardown
+  asa_config:
+    lines:
+      - "clear configure tunnel-group 1.1.1.1"
+    provider: "{{ cli }}"
+
 
 - debug: msg="END cli/more_system.yaml"
