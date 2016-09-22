@@ -4,6 +4,7 @@
 - name: Return NXAPI to started state with default config
   nxos_nxapi:
     provider: "{{ cli }}"
+    enable_https: true
   register: result
 
 - nxos_command:
@@ -22,7 +23,8 @@
 
 - name: Rest config again
   nxos_nxapi:
-     provider: "{{ cli }}"
+    provider: "{{ cli }}"
+    enable_https: true
   register: result
 
 - name: Assert idempotence
