@@ -10,6 +10,7 @@
   nxos_nxapi:
     enable_http: no
     enable_sandbox: no
+    enable_https: yes
     https_port: 9443
     provider: "{{ cli }}"
   register: result
@@ -31,6 +32,7 @@
   nxos_nxapi:
     enable_http: no
     enable_sandbox: no
+    enable_https: yes
     https_port: 9443
     provider: "{{ cli }}"
   register: result
