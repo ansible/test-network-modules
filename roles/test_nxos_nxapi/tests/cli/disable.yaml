@@ -3,8 +3,8 @@
 
 - name: Disable NXAPI
   nxos_nxapi:
-      state: absent
-      provider: "{{ cli }}"
+    state: absent
+    provider: "{{ cli }}"
   register: result
   # delegate_to: "{{ delegate_to }}"
 
@@ -13,9 +13,9 @@
 
 - name: Check NXAPI state
   nxos_command:
-      commands:
-          - show feature | grep nxapi
-      provider: "{{ cli }}"
+    commands:
+      - show feature | grep nxapi
+    provider: "{{ cli }}"
   register: result
   # delegate_to: "{{ delegate_to }}"
 
@@ -24,12 +24,14 @@
 
 - name: Assert NXAPI is disabled
   assert:
-      that: result.stdout[0] | search('disabled')
+    that:
+      result.stdout[0] | search('disabled')
 
 - name: Disable NXAPI again
   nxos_nxapi:
-      state: absent
-      provider: "{{ cli }}"
+    state:
+      absent
+    provider: "{{ cli }}"
   register: result
   # delegate_to: "{{ delegate_to }}"
 
@@ -38,5 +40,7 @@
   assert:
     that:
       result.changed == false
+# FIXME https://github.com/ansible/ansible-modules-core/issues/4955
+  ignore_errors: yes
 
 - debug: msg="END cli/disable.yaml"
