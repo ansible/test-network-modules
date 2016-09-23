@@ -3,7 +3,7 @@
 
 - name: Setup - put NXAPI in stopped state
   nxos_nxapi:
-      state: stopped
+      state: absent
       provider: "{{ cli }}"
   register: result
 
@@ -31,7 +31,8 @@
 
 - name: Assert idempotence
   assert:
-        that: result.commands | length == 0
+    that:
+      result.changed == false
 
 
 - debug: msg="END cli/enable.yaml"

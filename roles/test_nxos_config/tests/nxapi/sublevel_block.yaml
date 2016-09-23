@@ -10,7 +10,7 @@
     parents: ['ip access-list test']
     before: ['no ip access-list test']
     provider: "{{ nxapi }}"
-    force: yes
+    match: none
   ignore_errors: yes
 
 - name: configure sub level command using block resplace
@@ -54,6 +54,6 @@
   nxos_config:
     lines: ['no ip access-list test']
     provider: "{{ nxapi }}"
-    force: yes
+    match: none
 
 - debug: msg="END nxapi/sublevel_block.yaml"
