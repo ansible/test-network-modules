@@ -11,7 +11,7 @@
     before: ['no ip access-list extended test']
     after: ['exit']
     provider: "{{ cli }}"
-    force: yes
+    match: none
 
 - name: configure sub level command using block resplace
   ios_config:
@@ -56,7 +56,7 @@
   ios_config:
     lines:
       - no ip access-list extended test
-    force: yes
+    match: none
     provider: "{{ cli }}"
 
 - debug: msg="END cli/sublevel_block.yaml"

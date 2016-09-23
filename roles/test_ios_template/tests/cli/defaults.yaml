@@ -4,7 +4,7 @@
 - name: setup
   ios_config:
     commands: no interface Loopback999
-    force: yes
+    match: none
     provider: "{{ cli }}"
   ignore_errors: yes
 
@@ -35,7 +35,7 @@
 - name: teardown
   ios_config:
     commands: no interface Loopback999
-    force: yes
+    match: none
     provider: "{{ cli }}"
 
 - debug: msg="END cli/defaults.yaml"

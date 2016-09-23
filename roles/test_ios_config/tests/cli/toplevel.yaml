@@ -5,7 +5,7 @@
   ios_config:
     lines: ['hostname {{ inventory_hostname }}']
     provider: "{{ cli }}"
-    force: yes
+    match: none
 
 - name: configure top level command
   ios_config:
@@ -32,6 +32,6 @@
   ios_config:
     lines: ['hostname {{ inventory_hostname }}']
     provider: "{{ cli }}"
-    force: yes
+    match: none
 
 - debug: msg="END cli/toplevel.yaml"

@@ -7,7 +7,7 @@
       - "snmp-server contact ansible"
       - "hostname {{ inventory_hostname }}"
     provider: "{{ cli }}"
-    force: yes
+    match: none
 
 - name: configure top level command with before
   ios_config:
@@ -39,6 +39,6 @@
       - "no snmp-server contact"
       - "hostname {{ inventory_hostname }}"
     provider: "{{ cli }}"
-    force: yes
+    match: none
 
 - debug: msg="END cli/toplevel_before.yaml"
