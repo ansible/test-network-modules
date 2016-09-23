@@ -5,6 +5,7 @@
 
   vars:
     limit_to: "*"
+    test_items: ""
 
   roles:
    - { role: test_dellos9_command, when: "limit_to in ['*', 'dellos9_command']" }

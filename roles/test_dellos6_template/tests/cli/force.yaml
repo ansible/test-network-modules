@@ -5,7 +5,6 @@
   dellos6_config:
     commands:
       - interface loopback 62
-    force: yes
     provider: "{{ cli }}"
   ignore_errors: yes
 
@@ -37,7 +36,6 @@
   dellos6_config:
     commands:
       - no interface loopback 62
-    force: yes
     provider: "{{ cli }}"
 
 - debug: msg="END cli/force.yaml"
