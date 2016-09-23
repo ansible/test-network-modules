@@ -5,7 +5,7 @@
   iosxr_config:
     commands:
       - no interface Loopback999
-    force: yes
+    match: none
     provider: "{{ cli }}"
   ignore_errors: yes
 
@@ -50,7 +50,7 @@
   iosxr_config:
     commands:
       - no interface Loopback999
-    force: yes
+    match: none
     provider: "{{ cli }}"
 
 - debug: msg="END cli/backup.yaml"
