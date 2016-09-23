@@ -7,7 +7,7 @@
       - no description
       - no shutdown
     parents:
-      - interface Ethernet5
+      - interface Ethernet2/5
     force: yes
     provider: "{{ cli }}"
 
@@ -22,7 +22,7 @@
   file:
     path: "{{ item.path }}"
     state: absent
-  with_items: backup_files.files
+  with_items: "{{backup_files.files|default([])}}"
 
 - name: configure device with config
   nxos_config:
