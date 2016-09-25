@@ -5,14 +5,12 @@
   dellos6_config:
     commands:
       - no interface loopback 63
-    force: yes
     provider: "{{ cli }}"
   ignore_errors: yes
 
 - name: configure device with defaults included
   dellos6_template:
     src: defaults/config.j2
-    include_defaults: yes
     provider: "{{ cli }}"
   register: result
 
@@ -26,7 +24,6 @@
 - name: check device with defaults included
   dellos6_template:
     src: defaults/config.j2
-    include_defaults: yes
     provider: "{{ cli }}"
   register: result
 
@@ -41,7 +38,6 @@
   dellos6_config:
     commands:
       - no interface loopback 63
-    force: yes
     provider: "{{ cli }}"
 
 - debug: msg="END cli/defaults.yaml"
