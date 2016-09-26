@@ -5,7 +5,7 @@
   ios_command:
     commands:
       - show version
-    waitfor:
+    wait_for:
       - "result[0] contains bad_value_string"
     provider: "{{ cli }}"
   register: result
