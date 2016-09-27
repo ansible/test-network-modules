@@ -13,7 +13,7 @@
     before: ['no ipv4 access-list test']
     after: ['exit']
     provider: "{{ cli }}"
-    force: yes
+    match: none
 
 - name: configure sub level command using exact match
   iosxr_config:
@@ -60,6 +60,6 @@
   iosxr_config:
     commands: ['no ipv4 access-list test']
     provider: "{{ cli }}"
-    force: yes
+    match: none
 
 - debug: msg="END cli/sublevel_exact.yaml"
