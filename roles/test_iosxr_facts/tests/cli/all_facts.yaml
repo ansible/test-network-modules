@@ -24,9 +24,5 @@
 
       # Items from those subsets are present
       - "result.ansible_facts.ansible_net_filesystems is defined"
-      # Check that these facts not only are present, but are valid (positive integers)
-# FIXME  Need to check with privateip, however this seems OK
-#     - "result.ansible_facts.ansible_net_memfree_mb > 1"
-#     - "result.ansible_facts.ansible_net_memtotal_mb > 1"
 
 - debug: msg="END cli/all_facts.yaml"

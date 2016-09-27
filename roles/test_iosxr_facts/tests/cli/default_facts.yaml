@@ -21,9 +21,7 @@
       - "'config' not in result.ansible_facts.ansible_net_gather_subset"
 
       # Items from those subsets are present
-      - "result.ansible_facts.ansible_net_filesystems is defined" #hw
-# FIXME  Need to check with privateip, however this seems OK
-#      - "result.ansible_facts.ansible_net_memtotal_mb > 10" #hw
+      - "result.ansible_facts.ansible_net_filesystems is defined" # hardware
       - "result.ansible_facts.ansible_net_interfaces | length > 1" # more than one interface returned
 
       # ... and not present
