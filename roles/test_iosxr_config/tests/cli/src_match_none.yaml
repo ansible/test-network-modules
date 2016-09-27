@@ -28,7 +28,6 @@
   iosxr_config:
     src: basic/config.j2
     provider: "{{ cli }}"
-    match: none
   register: result
 
 - assert:
@@ -37,7 +36,5 @@
 # https://github.com/ansible/ansible-modules-core/issues/4807
       - "result.changed == false"
       - "result.updates is not defined"
-# FIXME bug https://github.com/ansible/ansible-modules-core/issues/5003
-  ignore_errors: true
 
 - debug: msg="END cli/src_match_none.yaml"
