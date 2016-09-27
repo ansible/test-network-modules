@@ -2,10 +2,10 @@
 - debug: msg="START cli/timeout.yaml"
 
 - name: test bad condition
-  ios_command:
+  iosxr_command:
     commands:
       - show version
-    waitfor:
+    wait_for:
       - "result[0] contains bad_value_string"
     provider: "{{ cli }}"
   register: result
