@@ -20,7 +20,7 @@
 
 - name: check simple config command idempontent
   vyos_config:
-    lines: hostname foo
+    lines: set system host-name foo
     provider: "{{ cli }}"
   register: result
 
