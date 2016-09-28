@@ -11,6 +11,6 @@
     - { role: test_eos_config, when: "limit_to in ['*', 'eos_config']" }
     - { role: test_eos_template, when: "limit_to in ['*', 'eos_template']" }
     - { role: test_eos_facts, when: "limit_to in ['*', 'eos_facts']" }
-    - { role: test_eos_eapi, debug: yes, when: "limit_to == '' or limit_to == 'eos_eapi'" }
+    - { role: test_eos_eapi, debug: yes, when: "limit_to in ['*', 'eos_eapi']"}
 
 
