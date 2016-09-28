@@ -6,7 +6,7 @@
     commands:
       - show version
       - show interfaces GigabitEthernet 0/0
-    waitfor:
+    wait_for:
       - result[0] contains 'Description: Foo'
     provider: "{{ cli }}"
   register: result
