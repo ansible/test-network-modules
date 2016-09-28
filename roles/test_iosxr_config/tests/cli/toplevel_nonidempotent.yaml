@@ -5,7 +5,7 @@
   iosxr_config:
     commands: ['hostname {{ inventory_hostname }}']
     provider: "{{ cli }}"
-    force: yes
+    match: none
 
 - name: configure top level command
   iosxr_config:
@@ -34,6 +34,6 @@
   iosxr_config:
     commands: ['hostname {{ inventory_hostname }}']
     provider: "{{ cli }}"
-    force: yes
+    match: none
 
 - debug: msg="END cli/toplevel_nonidempotent.yaml"
