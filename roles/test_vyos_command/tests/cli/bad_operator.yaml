@@ -6,7 +6,7 @@
     commands:
       - show version
       - show interfaces
-    waitfor:
+    wait_for:
       - result[0] is 'VyOS'
     provider: "{{ cli }}"
   register: result

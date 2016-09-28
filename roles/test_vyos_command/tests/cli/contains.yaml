@@ -6,7 +6,7 @@
     commands:
       - show version
       - show interface
-    waitfor:
+    wait_for:
       - result[0] contains VyOS
       - result[1] contains eth0
     provider: "{{ cli }}"
