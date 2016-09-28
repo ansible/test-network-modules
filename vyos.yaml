@@ -1,0 +1,12 @@
+---
+- hosts: vyos
+
+  vars:
+    limit_to: "*"
+
+  roles:
+    - { role: test_vyos_command, when: "limit_to in ['*', 'vyos_command']" }
+    - { role: test_vyos_config, when: "limit_to in ['*', 'vyos_config']" }
+
+
+
