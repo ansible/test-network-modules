@@ -3,39 +3,40 @@
 
 - name: setup
   ios_config:
-    commands: no interface Loopback999
+    commands:
+      - no description
+      - shutdown
+    parents:
+      - interface Loopback999
     match: none
     provider: "{{ cli }}"
-  ignore_errors: yes
 
 - name: configure device with defaults included
-  ios_template:
+  ios_config:
     src: defaults/config.j2
-    include_defaults: yes
+    defaults: yes
     provider: "{{ cli }}"
   register: result
+
+- debug: var=result
 
 - assert:
     that:
       - "result.changed == true"
-      - "result.updates is defined"
+      - "result.updates is not defined"
 
 - name: check device with defaults included
-  ios_template:
+  ios_config:
     src: defaults/config.j2
-    include_defaults: yes
+    defaults: yes
     provider: "{{ cli }}"
   register: result
+
+- debug: var=result
 
 - assert:
     that:
       - "result.changed == false"
-      - "result.updates is defined"
-
-- name: teardown
-  ios_config:
-    commands: no interface Loopback999
-    match: none
-    provider: "{{ cli }}"
+      - "result.updates is not defined"
 
 - debug: msg="END cli/defaults.yaml"
