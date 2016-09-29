@@ -19,14 +19,13 @@
   file:
     path: "{{ item.path }}"
     state: absent
-  with_items: "{{ backup_files.files }}"
-  when: backup_files is defined
+  with_items: "{{backup_files.files|default([])}}"
 
 - name: configure using template with backup
   junos_template:
     src: basic/config.j2
-    provider: "{{ netconf }}"
     backup: yes
+    provider: "{{ netconf }}"
   register: result
 
 - assert:
