@@ -3,7 +3,8 @@
 
 - name: setup
   asa_config:
-    lines: ['hostname firewall']
+    backup: true
+    #    lines: ['hostname firewall']
     provider: "{{ cli }}"
 
 - name: configure top level command

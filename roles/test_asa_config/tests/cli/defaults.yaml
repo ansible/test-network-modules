@@ -1,5 +1,5 @@
 ---
-- debug: msg="START cli/force.yaml"
+- debug: msg="START cli/defaults.yaml"
 
 - name: setup
   asa_config:
@@ -8,28 +8,32 @@
     provider: "{{ cli }}"
   ignore_errors: yes
 
-- name: configure device with config
-  asa_template:
-    src: basic/config.j2
+- name: configure device with defaults included
+  asa_config:
+    src: defaults/config.j2
+    include_defaults: yes
     provider: "{{ cli }}"
-    force: yes
   register: result
+
+- debug: var=result
 
 - assert:
     that:
       - "result.changed == true"
       - "result.updates is defined"
 
-- name: check device with config
-  asa_template:
-    src: basic/config.j2
+- name: check device with defaults included
+  asa_config:
+    src: defaults/config.j2
+    include_defaults: yes
     provider: "{{ cli }}"
-    force: yes
   register: result
+
+- debug: var=result
 
 - assert:
     that:
-      - "result.changed == true"
+      - "result.changed == false"
       - "result.updates is defined"
 
 - name: teardown
@@ -38,4 +42,4 @@
       - no object-group network OG-ANSIBLE-TEMPLATE-DEFAULT
     provider: "{{ cli }}"
 
-- debug: msg="END cli/force.yaml"
+- debug: msg="END cli/defaults.yaml"
