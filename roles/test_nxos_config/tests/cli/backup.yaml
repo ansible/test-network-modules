@@ -8,7 +8,7 @@
       - no shutdown
     parents:
       - interface Ethernet2/5
-    force: yes
+    match: none
     provider: "{{ cli }}"
 
 - name: collect any backup files

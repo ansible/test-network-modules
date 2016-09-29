@@ -9,10 +9,6 @@
       - "!hardware"
   register: result
 
-- copy:
-    content: "{{ result }}"
-    dest: "/tmp/facts_nohw"
-
 - assert:
     that:
       # _facts modules should never report a change

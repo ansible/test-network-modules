@@ -8,7 +8,7 @@
       - no shutdown
     parents:
       - interface Ethernet5
-    force: yes
+    match: none
     provider: "{{ cli }}"
 
 - name: collect any backup files
@@ -22,7 +22,7 @@
   file:
     path: "{{ item.path }}"
     state: absent
-  with_items: backup_files.files
+  with_items: "{{backup_files.files|default([])}}"
 
 - name: configure device with config
   eos_config:
