@@ -6,7 +6,7 @@
     commands:
       - show version
       - show interface mgmt0 | json
-    waitfor:
+    wait_for:
       - "result[1].TABLE_interface.ROW_interface.state neq down"
     provider: "{{ cli }}"
   register: result
@@ -21,7 +21,7 @@
     commands:
       - show version
       - show interface mgmt0 | json
-    waitfor:
+    wait_for:
       - "result[1].TABLE_interface.ROW_interface.state != down"
     provider: "{{ cli }}"
   register: result
