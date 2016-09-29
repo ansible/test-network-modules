@@ -12,7 +12,7 @@
   asa_config:
     src: basic/config.j2
     provider: "{{ cli }}"
-    force: yes
+    match: none
   register: result
 
 - assert:
@@ -24,7 +24,7 @@
   asa_config:
     src: basic/config.j2
     provider: "{{ cli }}"
-    force: yes
+    match: none
   register: result
 
 - assert:
