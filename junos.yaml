@@ -5,6 +5,7 @@
 
   vars:
     limit_to: "*"
+    debug: false
 
   roles:
     - { role: test_junos_command, when: "limit_to in ['*', 'junos_command']" }
