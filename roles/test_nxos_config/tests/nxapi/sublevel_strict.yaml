@@ -11,7 +11,7 @@
       - 50 permit ip 5.5.5.5/32 any log
     parents: ['ip access-list test']
     provider: "{{ nxapi }}"
-    force: yes
+    match: none
 
 - name: configure sub level command using strict match
   nxos_config:
@@ -57,6 +57,6 @@
   nxos_config:
     lines: ['no ip access-list test']
     provider: "{{ nxapi }}"
-    force: yes
+    match: none
 
 - debug: msg="END nxapi/sublevel_strict.yaml"

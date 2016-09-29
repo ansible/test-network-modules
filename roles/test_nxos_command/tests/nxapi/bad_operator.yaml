@@ -6,7 +6,7 @@
     commands:
       - show version
       - show interface mgmt0
-    waitfor:
+    wait_for:
       - "result[1].TABLE_interface.ROW_interface.state foo up"
     provider: "{{ nxapi }}"
   register: result

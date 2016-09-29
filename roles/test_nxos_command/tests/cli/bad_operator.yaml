@@ -6,7 +6,7 @@
     commands:
       - show version
       - show interface mgmt0 | json
-    waitfor:
+    wait_for:
       - "result[1].TABLE_interface.ROW_interface.state foo up"
     provider: "{{ cli }}"
   register: result
@@ -15,5 +15,6 @@
 - assert:
     that:
       - "result.failed == true"
+      - "result.msg is defined"
 
 - debug: msg="END cli/bad_operator.yaml"

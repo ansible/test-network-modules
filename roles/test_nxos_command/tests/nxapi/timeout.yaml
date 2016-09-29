@@ -5,7 +5,7 @@
   nxos_command:
     commands:
       - show version
-    waitfor:
+    wait_for:
       - "result[0].header_str contains foo"
     retries: 1
     provider: "{{ nxapi }}"

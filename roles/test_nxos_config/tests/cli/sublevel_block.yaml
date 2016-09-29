@@ -9,7 +9,7 @@
       - 30 permit ip 3.3.3.3/32 any log
     parents: ['ip access-list test']
     provider: "{{ cli }}"
-    force: yes
+    match: none
 
 - name: configure sub level command using block resplace
   nxos_config:
@@ -52,6 +52,6 @@
   nxos_config:
     lines: ['no ip access-list test']
     provider: "{{ cli }}"
-    force: yes
+    match: none
 
 - debug: msg='END cli/sublevel_block.yaml'
