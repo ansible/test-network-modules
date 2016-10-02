@@ -18,14 +18,11 @@
   register: backup_files
   delegate_to: localhost
 
-- debug: var=backup_files
-
 - name: delete backup files
   file:
     path: "{{ item.path }}"
     state: absent
-  with_items: backup_files.files
-  when: backup_files.files
+  with_items: "{{backup_files.files|default([])}}"
 
 - name: configure device with config
   eos_config:
