@@ -7,12 +7,12 @@
       - "snmp-server contact ansible"
       - "hostname {{ inventory_hostname }}"
     provider: "{{ nxapi }}"
-    force: yes
+    match: none
 
 - name: configure top level command with before
   nxos_config:
-    lines: ['hostname foo']
-    before: ['snmp-server contact bar']
+    lines: hostname foo
+    before: snmp-server contact bar
     provider: "{{ nxapi }}"
   register: result
 
@@ -24,8 +24,8 @@
 
 - name: configure top level command with before idempotent check
   nxos_config:
-    lines: ['hostname foo']
-    before: ['snmp-server contact foo']
+    lines: hostname foo
+    before: snmp-server contact foo
     provider: "{{ nxapi }}"
   register: result
 
@@ -39,6 +39,6 @@
       - "no snmp-server contact ansible"
       - "hostname {{ inventory_hostname }}"
     provider: "{{ nxapi }}"
-    force: yes
+    match: none
 
 - debug: msg="END nxapi/toplevel_before.yaml"
