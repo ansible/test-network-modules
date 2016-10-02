@@ -3,14 +3,14 @@
 
 - name: setup
   nxos_config:
-    lines: ['no ip access-list test']
+    lines: no ip access-list test
     provider: "{{ cli }}"
     match: none
 
 - name: configure sub level command
   nxos_config:
-    lines: ['10 permit ip any any log']
-    parents: ['ip access-list test']
+    lines: 10 permit ip any any log
+    parents: ip access-list test
     provider: "{{ cli }}"
   register: result
 
@@ -22,8 +22,8 @@
 
 - name: configure sub level command idempotent check
   nxos_config:
-    lines: ['10 permit ip any any log']
-    parents: ['ip access-list test']
+    lines: 10 permit ip any any log
+    parents: ip access-list test
     provider: "{{ cli }}"
   register: result
 
@@ -33,7 +33,7 @@
 
 - name: teardown
   nxos_config:
-    lines: ['no ip access-list test']
+    lines: no ip access-list test
     provider: "{{ cli }}"
     match: none
 
