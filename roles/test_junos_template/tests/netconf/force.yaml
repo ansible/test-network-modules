@@ -12,32 +12,32 @@
   junos_template:
     src: basic/config.j2
     provider: "{{ netconf }}"
-    force: yes
+    action: replace
   register: result
 
 - assert:
     that:
       - "result.changed == true"
-      - "'set interfaces lo0 unit 0 family inet address 1.1.1.1/32' in result.updates"
+      #- "'set interfaces lo0 unit 0 family inet address 1.1.1.1/32' in result.updates"
 
 - name: check basic config template idempotent
   junos_template:
     src: basic/config.j2
     provider: "{{ netconf }}"
-    force: yes
+    action: replace
   register: result
 
 - assert:
     that:
       - "result.changed == true"
-      - "'set interfaces lo0 unit 0 family inet address 1.1.1.1/32' in result.updates"
+      #- "'set interfaces lo0 unit 0 family inet address 1.1.1.1/32' in result.updates"
 
 - name: teardown
   junos_config:
     lines:
       - set system host-name {{ inventory_hostname }}
       - delete interfaces lo0
-    force: yes
+    action: replace
     provider: "{{ netconf }}"
 
 - debug: msg="END netconf/force.yaml"
