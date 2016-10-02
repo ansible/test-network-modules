@@ -6,7 +6,7 @@
     commands:
       - show version
       - show interfaces fxp0
-    encoding: text
+    display: text
     waitfor:
       - "result[0] contains vsrx01"
       - "result[1] contains fxp0"

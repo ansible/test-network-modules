@@ -3,8 +3,8 @@
 
 - name: get output for single command
   junos_command:
-    commands: ['show version']
-    encoding: text
+    commands: show version
+    display: text
     provider: "{{ netconf }}"
   register: result
 
@@ -19,7 +19,7 @@
     commands:
       - show version
       - show route
-    encoding: text
+    display: text
     provider: "{{ netconf }}"
   register: result
 

@@ -7,7 +7,7 @@
       - show version
     waitfor:
       - "result[0] contains bad_value_string"
-    encoding: text
+    display: text
     provider: "{{ netconf }}"
   register: result
   ignore_errors: yes

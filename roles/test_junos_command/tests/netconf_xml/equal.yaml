@@ -7,8 +7,8 @@
       - show version
       - show interfaces fxp0
     waitfor:
-      - "result[0].rpc-reply.software-information.host-name[0] == vsrx01"
-      - "result[1].rpc-reply.interface-information.physical-interface.name[0] == fxp0"
+      - "result[0].software-information.host-name == vsrx01"
+      - "result[1].interface-information.physical-interface.name == fxp0"
     format: xml
     provider: "{{ netconf }}"
   register: result
@@ -25,8 +25,8 @@
       - show version
       - show interfaces fxp0
     waitfor:
-      - "result[0].rpc-reply.software-information.host-name[0] eq vsrx01"
-      - "result[1].rpc-reply.interface-information.physical-interface.name[0] eq fxp0"
+      - "result[0].software-information.host-name eq vsrx01"
+      - "result[1].interface-information.physical-interface.name eq fxp0"
     format: xml
     provider: "{{ netconf }}"
   register: result
