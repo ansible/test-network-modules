@@ -18,7 +18,7 @@
       # It's a failure
       - "result.failed == true"
       # Sensible Failure message
-      - "result.msg == 'Bad subset'"
+      #- "result.msg == 'Bad subset'"
 
 ###############
 # FIXME Future
@@ -40,7 +40,7 @@
       # It's a failure
       - "result.failed == true"
       # Sensible Failure message
-      - "result.msg == 'Bad subset'"
+      #- "result.msg == 'Bad subset'"
   ignore_errors: true
 
 
