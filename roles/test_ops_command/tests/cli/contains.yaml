@@ -6,7 +6,7 @@
     commands:
       - show version
       - show interface GigabitEthernet0/0
-    waitfor:
+    wait_for:
       - "result[0] contains 15.6"
       - "result[1] contains GigabitEthernet0/0"
     provider: "{{ cli }}"
