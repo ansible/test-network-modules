@@ -18,19 +18,19 @@
 - assert:
     that:
       - "result.changed == true"
-      #- "'set interfaces lo0 unit 0 family inet address 1.1.1.1/32' in result.updates"
+      - "'1.1.1.1/32' in result.diff.prepared"
 
 - name: check basic config template idempotent
   junos_template:
     src: basic/config.j2
-    provider: "{{ netconf }}"
     action: replace
+    provider: "{{ netconf }}"
   register: result
 
 - assert:
     that:
       - "result.changed == true"
-      #- "'set interfaces lo0 unit 0 family inet address 1.1.1.1/32' in result.updates"
+      - "'1.1.1.1/32' in result.diff.prepared"
 
 - name: teardown
   junos_config:
