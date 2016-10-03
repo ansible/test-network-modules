@@ -6,7 +6,7 @@
     commands:
       - show version
       - show interfaces fxp0
-    waitfor:
+    wait_for:
       - "result[1].interface-information[0].physical-interface[0].name[0].data foo fxp0"
     encoding: text
     provider: "{{ netconf }}"

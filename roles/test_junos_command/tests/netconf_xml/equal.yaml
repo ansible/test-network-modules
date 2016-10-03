@@ -6,7 +6,7 @@
     commands:
       - show version
       - show interfaces fxp0
-    waitfor:
+    wait_for:
       - "result[0].software-information.host-name == vsrx01"
       - "result[1].interface-information.physical-interface.name == fxp0"
     format: xml
@@ -24,7 +24,7 @@
     commands:
       - show version
       - show interfaces fxp0
-    waitfor:
+    wait_for:
       - "result[0].software-information.host-name eq vsrx01"
       - "result[1].interface-information.physical-interface.name eq fxp0"
     format: xml

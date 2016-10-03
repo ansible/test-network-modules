@@ -7,7 +7,7 @@
       - show version
       - show interfaces fxp0
     format: xml
-    waitfor:
+    wait_for:
       - "result[0].software-information.host-name neq localhost"
     provider: "{{ netconf }}"
   register: result
@@ -24,7 +24,7 @@
       - show version
       - show interfaces fxp0
     format: xml
-    waitfor:
+    wait_for:
       - "result[0].software-information.host-name != localhost"
     provider: "{{ netconf }}"
   register: result
