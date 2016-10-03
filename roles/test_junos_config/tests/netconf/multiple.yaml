@@ -20,9 +20,10 @@
 - assert:
     that:
       - "result.changed == true"
-      # As of 2.2, junos_config no longer returns an update key
-      #- "'set system host-name {{ inventory_hostname }}' not in result.updates"
-      #- "'set interfaces lo0 unit 0 family inet address 1.1.1.1/32' in result.updates"
+      # Ensure host-name *hasn't* been updated
+      - "'host-name;' not in result.diff.prepared"
+      # Ensure interface has *been* updated
+      - "'address 1.1.1.1/32' in result.diff.prepared"
 
 - name: check multiple commands idempotent
   junos_config:
@@ -35,8 +36,7 @@
 - assert:
     that:
       - "result.changed == false"
-      #- "'set system host-name {{ inventory_hostname }}' not in result.updates"
-      #- "'set interfaces lo0 unit 0 family inet address 1.1.1.1/32' not in result.updates"
+      - "result.diff is not defined"
 
 - name: teardown
   junos_config:
