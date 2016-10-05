@@ -24,7 +24,8 @@
     that:
       - "result.changed == false"
       - "result.updates is not defined"
-# FIXME BUG https://github.com/ansible/ansible-modules-core/issues/5146
+# Defend https://github.com/ansible/ansible-modules-core/issues/5146
+      - "'comment argument cannot be more than 60 characters' in result.msg"
 # Check for the correct error message (and not a generic "Invalid input detected") once fixed
 
 
