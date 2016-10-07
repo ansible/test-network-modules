@@ -2,7 +2,7 @@
 
 Playbooks for testing Ansible Network modules
 
-For more infomation about using Ansible to mananage your network infrastructre please see https://www.ansible.com/network
+For more information about using Ansible to manage your network infrastructure please see https://www.ansible.com/network
 
 ```
 $ ansible-playbook all.yaml
