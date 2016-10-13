@@ -11,7 +11,7 @@
 - name: configure device with defaults included
   asa_config:
     src: defaults/config.j2
-    include_defaults: yes
+    defaults: yes
     provider: "{{ cli }}"
   register: result
 
@@ -25,7 +25,7 @@
 - name: check device with defaults included
   asa_config:
     src: defaults/config.j2
-    include_defaults: yes
+    defaults: yes
     provider: "{{ cli }}"
   register: result
 
@@ -34,7 +34,7 @@
 - assert:
     that:
       - "result.changed == false"
-      - "result.updates is defined"
+      - "result.updates is not defined"
 
 - name: teardown
   asa_config:

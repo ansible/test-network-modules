@@ -28,7 +28,7 @@
 - assert:
     that:
       - "result.changed == false"
-      - "result.updates is defined"
+      - "result.updates is not defined"
 
 - name: teardown
   asa_config:
