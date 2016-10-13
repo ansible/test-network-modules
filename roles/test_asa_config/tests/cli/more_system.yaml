@@ -6,6 +6,7 @@
     lines:
       - "clear configure tunnel-group 1.1.1.1"
     provider: "{{ cli }}"
+  ignore_errors: yes
 
 
 - name: Prepare tunnel-group
@@ -20,7 +21,7 @@
     parents: tunnel-group 1.1.1.1 ipsec-attributes
     lines:
       - "ikev1 pre-shared-key abc123"
-    show_command: "more system:running-config"
+    passwords: yes
     provider: "{{ cli }}"
 
 - name: Test idempotency
@@ -28,7 +29,7 @@
     parents: tunnel-group 1.1.1.1 ipsec-attributes
     lines:
       - "ikev1 pre-shared-key abc123"
-    show_command: "more system:running-config"
+    passwords: yes
     provider: "{{ cli }}"
   register: result
 
