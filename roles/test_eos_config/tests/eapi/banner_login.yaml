@@ -1,5 +1,5 @@
 ---
-- debug: msg="START cli/banner_login.yaml"
+- debug: msg="START eapi/banner_login.yaml"
 
 - name: setup
   eos_config:
