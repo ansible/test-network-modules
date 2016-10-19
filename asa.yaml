@@ -10,3 +10,4 @@
   roles:
     - { role: test_asa_command, when: "limit_to in ['*', 'asa_command']" }
     - { role: test_asa_config, when: "limit_to in ['*', 'asa_config']" }
+    - { role: test_asa_acl, when: "limit_to in ['*', 'asa_acl']" }
