@@ -2,7 +2,7 @@
 - debug: msg="START cli/timeout.yaml"
 
 - name: test bad condition
-  ios_command:
+  asa_command:
     commands:
       - show version
     wait_for:
