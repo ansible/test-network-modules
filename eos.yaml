@@ -6,6 +6,18 @@
   vars:
     limit_to: "*"
 
+  pre_tasks:
+    - name: enable cli on remote device
+      eos_eapi:
+        enable_http: yes
+        enable_https: yes
+        enable_local_http: yes
+        enable_socket: yes
+        provider: "{{ cli }}"
+      register: eos_eapi_output
+      connection: local
+
+
   roles:
     - { role: test_eos_command, when: "limit_to in ['*', 'eos_command']" }
     - { role: test_eos_config, when: "limit_to in ['*', 'eos_config']" }
